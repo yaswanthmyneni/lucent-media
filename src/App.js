@@ -1,5 +1,13 @@
+import { Footer, Header, AsideBarLeft } from "components";
+
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello Social Media</h1>;
+  return (
+    <>
+      <Header />
+      <AsideBarLeft />
+      <Footer />
+    </>
+  );
 }
 
 export default App;
