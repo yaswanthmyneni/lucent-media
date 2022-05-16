@@ -32,7 +32,9 @@ const NewPostCard = () => {
             <BsEmojiSunglasses className="text-2xl cursor-not-allowed" />
           </div>
           <button
-            className="px-8 py-2 ml-auto rounded bg-green-600 hover:bg-green-700 text-slate-100"
+            className={`px-8 py-2 ml-auto rounded ${
+              content === "" ? "cursor-not-allowed" : ""
+            } bg-green-600 hover:bg-green-700 text-slate-100`}
             onClick={() => {
               if (content === "") {
                 // TODO - will implement toast here

@@ -1,5 +1,5 @@
 import { Avatar } from "components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost, setIsEdit } from "redux/slices/postSlice";
 
@@ -10,9 +10,9 @@ const EditPostCard = () => {
   const { foundUser, postId, content } = useSelector((store) => store.post);
   const { image } = foundUser;
 
-  if (editedContent === "") {
+  useEffect(() => {
     setEditedContent(content);
-  }
+  }, [content]);
 
   return (
     <>
@@ -29,8 +29,14 @@ const EditPostCard = () => {
           ></textarea>
           <div className="text-right">
             <button
-              className="px-8 py-2 ml-auto rounded bg-green-600 hover:bg-green-700 text-slate-100"
+              className={`px-8 py-2 ml-auto rounded ${
+                editedContent === "" ? "cursor-not-allowed" : ""
+              } bg-green-600 hover:bg-green-700 text-slate-100`}
               onClick={() => {
+                if (editedContent === "") {
+                  // TODO - will implement toast here
+                  return console.log("please enter any input");
+                }
                 dispatch(setIsEdit(false));
                 dispatch(editPost({ editedContent, postId }));
                 setEditedContent("");
