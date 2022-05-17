@@ -5,7 +5,7 @@ import { getAllPosts, getAllUsers, logIn } from "redux/slices/postSlice";
 
 const HomePage = () => {
   const { allPosts, status, error, foundUser, isEdit } = useSelector(
-    (store) => store.post
+    (state) => state.post
   );
   const dispatch = useDispatch();
 

@@ -11,7 +11,7 @@ import { createNewPost } from "redux/slices/postSlice";
 const NewPostCard = () => {
   const [content, setContent] = useState("");
 
-  const { foundUser } = useSelector((store) => store.post);
+  const { foundUser } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   return (

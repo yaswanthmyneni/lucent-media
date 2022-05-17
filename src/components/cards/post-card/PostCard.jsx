@@ -18,7 +18,7 @@ const PostCard = (props) => {
   const [isPostOptions, setIsPostOptions] = useState(false);
 
   const { allUsers, foundUser, isEdit, postId } = useSelector(
-    (store) => store.post
+    (state) => state.post
   );
   const dispatch = useDispatch();
 
