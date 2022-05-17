@@ -4,11 +4,11 @@ import clsx from "clsx";
 
 const AsideBarLeft = () => {
   return (
-    <aside className="p-2 w-52 text-lg fixed left-0">
+    <aside className="p-2 mx-auto w-2/3 text-lg col-start-1 col-end-3">
       <NavLink
         to="/"
         className={({ isActive }) =>
-          clsx("flex items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
+          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
             "bg-slate-400": isActive,
           })
         }
@@ -19,7 +19,7 @@ const AsideBarLeft = () => {
       <NavLink
         to="/explore"
         className={({ isActive }) =>
-          clsx("flex items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
+          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
             "bg-slate-400": isActive,
           })
         }
@@ -30,7 +30,7 @@ const AsideBarLeft = () => {
       <NavLink
         to="/bookmark"
         className={({ isActive }) =>
-          clsx("flex items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
+          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
             "bg-slate-400": isActive,
           })
         }

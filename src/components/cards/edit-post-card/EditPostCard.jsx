@@ -7,7 +7,8 @@ const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");
   const dispatch = useDispatch();
 
-  const { foundUser, postId, content } = useSelector((state) => state.post);
+  const { postId, content } = useSelector((state) => state.post);
+  const { foundUser } = useSelector((state) => state.auth);
   const { image } = foundUser;
 
   useEffect(() => {

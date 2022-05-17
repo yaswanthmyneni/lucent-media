@@ -10,4 +10,4 @@ export {
   AiOutlineHeart,
 } from "react-icons/ai";
 export { MdExplore, MdOutlineShare, MdSearch, MdModeEdit, MdDelete } from "react-icons/md";
-export { FaGithub, FaLinkedin, FaTwitter, FaBookmark, FaUser } from "react-icons/fa";
+export { FaGithub, FaLinkedin, FaTwitter, FaBookmark, FaUser, FaAngleRight } from "react-icons/fa";

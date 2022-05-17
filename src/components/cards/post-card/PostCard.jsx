@@ -11,15 +11,20 @@ import {
 } from "assets/icons/icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPostId, setIsEdit, deletePost, setContent } from "redux/slices/postSlice";
+import {
+  setPostId,
+  setIsEdit,
+  deletePost,
+  setContent,
+} from "redux/slices/postSlice";
 
 const PostCard = (props) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isPostOptions, setIsPostOptions] = useState(false);
+  const encodedToken = localStorage.getItem("token");
 
-  const { allUsers, foundUser, isEdit, postId } = useSelector(
-    (state) => state.post
-  );
+  const { allUsers, isEdit, postId } = useSelector((state) => state.post);
+  const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const {
@@ -39,7 +44,7 @@ const PostCard = (props) => {
         <div className="flex flex-wrap gap-2 items-center">
           <b>{`${firstName} ${lastName}`}</b>
           <p className="text-sm text-slate-500">@{username} . time</p>
-          {foundUser?.username === username && (
+          {foundUser?.username === username && encodedToken && (
             <BiDotsHorizontalRounded
               className="ml-auto text-xl cursor-pointer"
               onClick={() => {
