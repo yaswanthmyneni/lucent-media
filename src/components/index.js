@@ -1,7 +1,9 @@
-export { Header } from "./header/Header.jsx";
-export { Footer } from "./footer/Footer.jsx";
-export { AsideBarLeft } from "./aside-bar/AsideBarLeft.jsx";
-export { Avatar } from "./avatar/Avatar.jsx";
-export { NewPostCard } from "./cards/new-post-card/NewPostCard.jsx";
-export { EditPostCard } from "./cards/edit-post-card/EditPostCard.jsx";
-export { PostCard } from "./cards/post-card/PostCard.jsx";
+export { Header } from "./header/Header";
+export { Footer } from "./footer/Footer";
+export { AsideBarLeft } from "./aside-bar/AsideBarLeft";
+export { Avatar } from "./avatar/Avatar";
+export { NewPostCard } from "./cards/new-post-card/NewPostCard";
+export { EditPostCard } from "./cards/edit-post-card/EditPostCard";
+export { PostCard } from "./cards/post-card/PostCard";
+export { Routing } from "./routes/Routing";
+export { RequireAuth } from "./require-auth/RequireAuth";

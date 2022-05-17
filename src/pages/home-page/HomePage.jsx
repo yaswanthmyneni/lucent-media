@@ -1,23 +1,20 @@
 import { AsideBarLeft, PostCard, NewPostCard, EditPostCard } from "components";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, getAllUsers, logIn } from "redux/slices/postSlice";
+import { getAllPosts, getAllUsers } from "redux/slices/postSlice";
+import { useEffect } from "react";
 
 const HomePage = () => {
-  const { allPosts, status, error, foundUser, isEdit } = useSelector(
+  const { allPosts, status, error, isEdit } = useSelector(
     (state) => state.post
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (foundUser?._id === undefined) {
-      dispatch(logIn());
-    }
     dispatch(getAllUsers());
     if (status === "idle") {
       dispatch(getAllPosts());
     }
-  }, [dispatch, status, foundUser._id]);
+  }, [dispatch, status]);
 
   return (
     <div className="grid grid-cols-8 mt-4 pb-36">

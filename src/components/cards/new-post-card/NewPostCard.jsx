@@ -10,9 +10,17 @@ import { createNewPost } from "redux/slices/postSlice";
 
 const NewPostCard = () => {
   const [content, setContent] = useState("");
+  const encodedToken = localStorage.getItem("token");
 
-  const { foundUser } = useSelector((state) => state.post);
+  const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const handlePost = (encodedToken, content, setContent) => {
+    if (encodedToken) {
+      dispatch(createNewPost(content));
+      setContent("");
+    }
+  };
 
   return (
     <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400">
@@ -32,17 +40,9 @@ const NewPostCard = () => {
             <BsEmojiSunglasses className="text-2xl cursor-not-allowed" />
           </div>
           <button
-            className={`px-8 py-2 ml-auto rounded ${
-              content === "" ? "cursor-not-allowed" : ""
-            } bg-green-600 hover:bg-green-700 text-slate-100`}
-            onClick={() => {
-              if (content === "") {
-                // TODO - will implement toast here
-                return console.error("Give valid input for posting");
-              }
-              dispatch(createNewPost(content));
-              setContent("");
-            }}
+            className={`px-8 py-2 ml-auto rounded bg-green-600 hover:bg-green-700 text-slate-100`}
+            onClick={() => handlePost(encodedToken, content, setContent)}
+            disabled={!content}
           >
             Post
           </button>

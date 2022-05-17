@@ -1,16 +1,10 @@
-import { Footer, Header } from "components";
-import { HomePage } from "pages";
-import { Routes, Route } from "react-router-dom";
-import Mockman from "mockman-js";
+import { Footer, Header, Routing } from "components";
 
 function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/mockman" element={<Mockman />} />
-      </Routes>
+      <Routing />
       <Footer />
     </>
   );

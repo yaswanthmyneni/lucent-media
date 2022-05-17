@@ -7,7 +7,6 @@ const initialState = {
   allUsers: [],
   postId: null,
   error: null,
-  foundUser: {},
   isEdit: false,
   content: "",
 };
@@ -35,25 +34,6 @@ export const getAllUsers = createAsyncThunk("posts/getAllUsers", () => {
         url: "/api/users",
       });
       return response.data.users;
-    } catch (error) {
-      return error;
-    }
-  })();
-});
-
-// This will go to authSlice later
-export const logIn = createAsyncThunk("posts/logIn", () => {
-  return (async () => {
-    try {
-      const response = await axios({
-        method: "POST",
-        url: "/api/auth/login",
-        data: { username: "adarshbalika", password: "adarshBalika123" },
-      });
-      return {
-        token: response.data.encodedToken,
-        foundUser: response.data.foundUser,
-      };
     } catch (error) {
       return error;
     }
@@ -173,16 +153,6 @@ export const postSlice = createSlice({
     },
     [getAllUsers.rejected]: (state, action) => {
       state.error = "api call (getAllUsers) got rejected";
-      state.status = "rejected";
-      console.error(action.payload);
-    },
-    [logIn.fulfilled]: (state, action) => {
-      localStorage.setItem("token", action.payload.token);
-      state.foundUser = action.payload.foundUser;
-      state.status = "fulfilled";
-    },
-    [logIn.rejected]: (state, action) => {
-      state.error = "api call (logIn) got rejected";
       state.status = "rejected";
       console.error(action.payload);
     },
