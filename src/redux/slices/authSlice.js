@@ -7,7 +7,7 @@ const initialState = {
 
 export const logInUser = createAsyncThunk(
   "auth/logInUser",
-  async (userDetails) => {
+  async (userDetails, { rejectWithValue }) => {
     try {
       const response = await axios({
         method: "POST",
@@ -21,14 +21,14 @@ export const logInUser = createAsyncThunk(
         };
       }
     } catch (error) {
-      return error;
+      return rejectWithValue(`Error from logInUser: ${error.message}`);
     }
   }
 );
 
 export const signUpUser = createAsyncThunk(
   "auth/signUpUser",
-  async (userDetails) => {
+  async (userDetails, { rejectWithValue }) => {
     try {
       const response = await axios({
         method: "POST",
@@ -40,7 +40,7 @@ export const signUpUser = createAsyncThunk(
         createdUser: response.data.createdUser,
       };
     } catch (error) {
-      return error;
+      return rejectWithValue(`Error from signUpUser: ${error.message}`);
     }
   }
 );
