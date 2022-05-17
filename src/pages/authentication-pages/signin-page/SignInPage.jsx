@@ -30,12 +30,12 @@ const SignInPage = () => {
         <div className="w-96 py-4 px-8 m-auto border-2 rounded border-green-300">
           <h2 className="text-3xl font-medium text-center">SignIn</h2>
           <form className="mt-4 flex flex-col">
-            {inputFields.map((field) => (
+            {inputFields.map((field, index) => (
               <Fragment key={field}>
                 <label htmlFor={field}>{field}:</label>
                 <input
                   className="p-1 mb-2 outline-none border border-gray-400"
-                  type="text"
+                  type={index === 1 ? "password" : "text"}
                   id={field}
                   name={field}
                   value={signInDetails[field]}
