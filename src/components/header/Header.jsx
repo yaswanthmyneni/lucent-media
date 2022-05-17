@@ -6,7 +6,7 @@ const Header = () => {
   const [isShowUserOptions, setIsShowUserOptions] = useState(false);
 
   return (
-    <header className="sticky top-0 flex items-center relative w-full p-4 bg-green-600 text-slate-50">
+    <header className="sticky top-0 z-30 flex items-center w-full p-4 bg-green-600 text-slate-50">
       <NavLink to="/">
         <h1 className="text-4xl">Lucent Media</h1>
       </NavLink>
