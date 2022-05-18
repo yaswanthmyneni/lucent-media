@@ -23,7 +23,8 @@ const PostCard = (props) => {
   const [isPostOptions, setIsPostOptions] = useState(false);
   const encodedToken = localStorage.getItem("token");
 
-  const { allUsers, isEdit, postId } = useSelector((state) => state.post);
+  const { isEdit, postId } = useSelector((state) => state.post);
+  const { allUsers } = useSelector((state) => state.user);
   const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -38,7 +39,9 @@ const PostCard = (props) => {
     <div className="flex flex-wrap gap-4 justify-center p-2 mb-4 border-2 border-zinc-400 relative">
       <Avatar
         size="w-16 h-16"
-        image={`${username === userDetails.username ? image : ""}`}
+        image={`${
+          foundUser.username === userDetails.username ? foundUser.image : image
+        }`}
       />
       <div className="w-10/12">
         <div className="flex flex-wrap gap-2 items-center">

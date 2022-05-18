@@ -4,7 +4,7 @@ import axios from "axios";
 const initialState = {
   status: "idle",
   allPosts: [],
-  allUsers: [],
+  userPosts: [],
   postId: null,
   error: null,
   isEdit: false,
@@ -26,18 +26,17 @@ export const getAllPosts = createAsyncThunk(
   }
 );
 
-// This will go to userSlice later
-export const getAllUsers = createAsyncThunk(
-  "posts/getAllUsers",
-  async (_, { rejectWithValue }) => {
+export const getPostsByUsername = createAsyncThunk(
+  "posts/getPostsByUsername",
+  async (username, { rejectWithValue }) => {
     try {
       const response = await axios({
         method: "get",
-        url: "/api/users",
+        url: `/api/posts/user/${username}`,
       });
-      return response.data.users;
+      return response.data.posts;
     } catch (error) {
-      return rejectWithValue(`Error from getAllUsers: ${error.message}`);
+      return rejectWithValue(`Error from getPostsByUsername: ${error.message}`);
     }
   }
 );
@@ -111,51 +110,55 @@ export const postSlice = createSlice({
       state.status = "loading";
     },
     [getAllPosts.fulfilled]: (state, action) => {
-      state.allPosts = action.payload;
       state.status = "fulfilled";
+      state.allPosts = action.payload;
     },
     [getAllPosts.rejected]: (state, action) => {
       state.status = "rejected";
-      state.error = "api call got rejected";
+      state.error = "api call got rejected, check console";
+      console.error(action.payload);
+    },
+    [getPostsByUsername.pending]: (state) => {
+      state.status = "loading";
+    },
+    [getPostsByUsername.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.userPosts = action.payload;
+    },
+    [getPostsByUsername.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = "api call got rejected, check console";
       console.error(action.payload);
     },
     [createNewPost.fulfilled]: (state, action) => {
-      state.allPosts = action.payload;
       state.status = "fulfilled";
+      state.allPosts = action.payload;
     },
     [createNewPost.rejected]: (state, action) => {
-      state.error = "api call (createNewPost) got rejected";
       state.status = "rejected";
-      console.error("createNewPost ", action.payload);
+      state.error = "api call (createNewPost) got rejected";
+      console.error(action.payload);
     },
     [editPost.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
       state.allPosts = action.payload;
       state.postId = null;
+      state.isEdit = false;
       state.content = "";
-      state.status = "fulfilled";
     },
     [editPost.rejected]: (state, action) => {
-      state.error = "api call (editPost) got rejected";
       state.status = "rejected";
-      console.error("editPost ", action.payload);
+      state.error = "api call (editPost) got rejected";
+      console.error(action.payload);
     },
     [deletePost.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
       state.allPosts = action.payload;
       state.postId = null;
-      state.status = "fulfilled";
     },
     [deletePost.rejected]: (state, action) => {
+      state.status = "rejected";
       state.error = "api call (deletePost) got rejected";
-      state.status = "rejected";
-      console.error("deletePost ", action.payload);
-    },
-    [getAllUsers.fulfilled]: (state, action) => {
-      state.allUsers = action.payload;
-      state.status = "fulfilled";
-    },
-    [getAllUsers.rejected]: (state, action) => {
-      state.error = "api call (getAllUsers) got rejected";
-      state.status = "rejected";
       console.error(action.payload);
     },
   },

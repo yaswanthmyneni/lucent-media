@@ -1,4 +1,4 @@
-import { PageNotFound, HomePage, LogoutPage, SignInPage, SignUpPage } from "pages";
+import { PageNotFound, HomePage, LogoutPage, SignInPage, SignUpPage, ProfilePage } from "pages";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
 
@@ -8,6 +8,7 @@ const Routing = () => {
       <Route path="*" element={<PageNotFound />} />
       {/* will make home-page to private route later */}
       <Route path="/" element={<HomePage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/logout" element={<LogoutPage />} />
