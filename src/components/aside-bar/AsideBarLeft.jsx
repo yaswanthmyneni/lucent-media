@@ -6,7 +6,7 @@ const AsideBarLeft = () => {
   return (
     <aside className="p-2 mx-auto w-2/3 text-lg col-start-1 col-end-3">
       <NavLink
-        to="/"
+        to="/home"
         className={({ isActive }) =>
           clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
             "bg-slate-400": isActive,
@@ -17,7 +17,7 @@ const AsideBarLeft = () => {
         Home
       </NavLink>
       <NavLink
-        to="/explore"
+        to="/"
         className={({ isActive }) =>
           clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
             "bg-slate-400": isActive,

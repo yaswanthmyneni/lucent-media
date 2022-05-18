@@ -24,7 +24,7 @@ const LogoutPage = () => {
               navigate("/");
             }}
           >
-            home
+            explore
           </button>
         </div>
       </div>

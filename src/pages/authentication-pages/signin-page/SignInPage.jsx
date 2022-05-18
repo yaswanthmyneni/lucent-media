@@ -12,7 +12,7 @@ const SignInPage = () => {
 
   // from react-router-dom
   const navigate = useNavigate();
-  const location = useLocation();
+  const location  = useLocation();
 
   const dispatch = useDispatch();
   const inputFields = ["username", "password"];
@@ -21,7 +21,11 @@ const SignInPage = () => {
     e.preventDefault();
     dispatch(logInUser(signInDetails));
     setSignInDetails({ username: "", password: "" });
-    navigate(location?.state?.from?.pathname, { replace: true });
+    if (location?.state?.from?.pathname !== "/profile") {
+      navigate(location?.state?.from?.pathname, { replace: true });
+    } else {
+      navigate("/", { replace: true });
+    }
   };
 
   return (
