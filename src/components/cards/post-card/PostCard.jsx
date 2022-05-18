@@ -23,7 +23,8 @@ const PostCard = (props) => {
   const [isPostOptions, setIsPostOptions] = useState(false);
   const encodedToken = localStorage.getItem("token");
 
-  const { allUsers, isEdit, postId } = useSelector((state) => state.post);
+  const { isEdit, postId } = useSelector((state) => state.post);
+  const { allUsers } = useSelector((state) => state.user);
   const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 

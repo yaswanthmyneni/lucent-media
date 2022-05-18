@@ -1,7 +1,7 @@
 import { Avatar } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPost, setIsEdit } from "redux/slices/postSlice";
+import { editPost } from "redux/slices/postSlice";
 
 const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");
@@ -14,6 +14,20 @@ const EditPostCard = () => {
   useEffect(() => {
     setEditedContent(content);
   }, [content]);
+
+  const handleEditPost = (
+    editedContent,
+    editPost,
+    setEditedContent,
+    dispatch
+  ) => {
+    if (editedContent === "") {
+      // TODO - will implement toast here
+      return console.log("please enter any input");
+    }
+    dispatch(editPost({ editedContent, postId }));
+    setEditedContent("");
+  };
 
   return (
     <>
@@ -33,15 +47,14 @@ const EditPostCard = () => {
               className={`px-8 py-2 ml-auto rounded ${
                 editedContent === "" ? "cursor-not-allowed" : ""
               } bg-green-600 hover:bg-green-700 text-slate-100`}
-              onClick={() => {
-                if (editedContent === "") {
-                  // TODO - will implement toast here
-                  return console.log("please enter any input");
-                }
-                dispatch(setIsEdit(false));
-                dispatch(editPost({ editedContent, postId }));
-                setEditedContent("");
-              }}
+              onClick={() =>
+                handleEditPost(
+                  editedContent,
+                  editPost,
+                  setEditedContent,
+                  dispatch
+                )
+              }
             >
               Edit post
             </button>

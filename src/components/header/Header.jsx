@@ -1,7 +1,7 @@
 import { CgProfile } from "assets/icons/icons";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFoundUser } from "redux/slices/authSlice";
 
 const Header = () => {
@@ -10,6 +10,9 @@ const Header = () => {
   const encodedToken = localStorage.getItem("token");
   const { pathname } = useLocation();
 
+  const {
+    foundUser: { _id },
+  } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -35,6 +38,7 @@ const Header = () => {
         <div className="text-black text-lg cursor-pointer bg-slate-100 absolute top-11 right-8 border-2 border-gray-400 ">
           <NavLink
             to="/profile"
+            state={{ userId: _id }}
             className="py-1 px-10 hover:bg-lime-400 block border-b-2 border-gray-400 text-center"
             onClick={() => setIsShowUserOptions(!isShowUserOptions)}
           >
