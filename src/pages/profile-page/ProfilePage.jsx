@@ -48,6 +48,8 @@ const ProfilePage = () => {
     dispatch(getPostsByUsername(user.username));
   }, [userId, user.username, user._id, dispatch, allPosts]);
 
+  const reversedUserPosts = [...userPosts]?.reverse();
+
   return (
     <div className="grid grid-cols-8 mt-4 pb-36">
       <AsideBarLeft />
@@ -121,7 +123,7 @@ const ProfilePage = () => {
           <p>{error}</p>
         ) : (
           <>
-            {userPosts?.map((post) => (
+            {reversedUserPosts?.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
           </>

@@ -29,7 +29,7 @@ const HomePage = () => {
   userFollowing?.push(username);
   const followingUsersPost = allPosts.filter((post) =>
     userFollowing?.includes(post.username)
-  );
+  ).reverse();
 
   return (
     <div className="grid grid-cols-8 mt-4 pb-36">
@@ -45,7 +45,7 @@ const HomePage = () => {
           <p>{error}</p>
         ) : (
           <>
-            {followingUsersPost?.reverse()?.map((post) => (
+            {followingUsersPost?.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
           </>
