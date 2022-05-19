@@ -2,7 +2,7 @@ import { CgProfile } from "assets/icons/icons";
 import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFoundUser } from "redux/slices/authSlice";
+import { setFoundUser } from "redux-management";
 
 const Header = () => {
   const [isShowUserOptions, setIsShowUserOptions] = useState(false);

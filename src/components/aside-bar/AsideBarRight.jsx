@@ -2,7 +2,7 @@ import { MdSearch } from "assets/icons/icons";
 import { ProfileCard } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "redux/slices/userSlice";
+import { getAllUsers } from "redux-management";
 
 const AsideBarRight = () => {
   const { foundUser } = useSelector((state) => state.auth);
@@ -10,7 +10,7 @@ const AsideBarRight = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    allUsers?.length === 0 && dispatch(getAllUsers());
+    dispatch(getAllUsers());
   }, [dispatch, allUsers]);
 
   return (

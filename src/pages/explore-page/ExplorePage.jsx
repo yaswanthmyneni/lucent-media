@@ -6,7 +6,7 @@ import {
 } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "redux/slices/postSlice";
+import { getAllPosts } from "redux-management";
 
 const ExplorePage = () => {
   const { allPosts, status, error, isEdit } = useSelector(
@@ -34,11 +34,11 @@ const ExplorePage = () => {
         ) : status === "rejected" ? (
           <p>{error}</p>
         ) : (
-          <>
+          <div className="flex flex-col gap-2">
             {reversePosts?.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
-          </>
+          </div>
         )}
       </main>
       <AsideBarRight />

@@ -1,7 +1,7 @@
 import { Avatar } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPost } from "redux/slices/postSlice";
+import { editPost } from "redux-management";
 
 const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");

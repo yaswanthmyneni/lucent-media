@@ -1,7 +1,6 @@
 import { IoCloseSharp } from "assets/icons/icons";
 import { useState } from "react";
-import { setFoundUser } from "redux/slices/authSlice";
-import { editUserProfile } from "redux/slices/userSlice";
+import { setFoundUser, editUserProfile } from "redux-management";
 import { useDispatch } from "react-redux";
 
 const EditProfile = ({ setIsEditProfile }) => {

@@ -1,7 +1,7 @@
 import { AsideBarLeft, AsideBarRight, PostCard } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBookmarkedPosts } from "redux/slices/userSlice";
+import { getAllBookmarkedPosts } from "redux-management";
 
 const BookmarkPage = () => {
   const { bookmarkedPosts } = useSelector((state) => state.user);

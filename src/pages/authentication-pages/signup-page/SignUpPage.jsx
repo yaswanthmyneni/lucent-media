@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaAngleRight } from "assets/icons/icons";
 import { useState, Fragment } from "react";
-import { signUpUser } from "redux/slices/authSlice";
+import { signUpUser } from "redux-management";
 import { useDispatch } from "react-redux";
 
 const SignUpPage = () => {

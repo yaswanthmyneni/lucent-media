@@ -6,7 +6,7 @@ import {
 import { Avatar } from "components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewPost } from "redux/slices/postSlice";
+import { createNewPost } from "redux-management";
 
 const NewPostCard = () => {
   const [content, setContent] = useState("");
