@@ -10,7 +10,7 @@ const AsideBarRight = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    allUsers?.length === 0 && dispatch(getAllUsers());
   }, [dispatch, allUsers]);
 
   return (
