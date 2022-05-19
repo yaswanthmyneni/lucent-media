@@ -2,12 +2,12 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
   const encodedToken = localStorage.getItem("token");
-  const { pathname } = useLocation();
+  const location = useLocation();
 
   return encodedToken ? (
     children
   ) : (
-    <Navigate to="/signin" state={{ from: { pathname } }} replace />
+    <Navigate to="/signin" state={{ from: location }} replace />
   );
 };
 

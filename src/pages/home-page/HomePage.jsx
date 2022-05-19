@@ -34,11 +34,11 @@ const HomePage = () => {
         ) : status === "rejected" ? (
           <p>{error}</p>
         ) : (
-          <>
+          <div className="flex flex-col gap-2">
             {followingUsersPost?.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
-          </>
+          </div>
         )}
       </main>
       <AsideBarRight />

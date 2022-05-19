@@ -19,8 +19,9 @@ import {
   setContent,
   likePost,
   dislikePost,
-} from "redux/slices/postSlice";
-import { bookmarkPost, removeBookmark } from "redux/slices/userSlice";
+  bookmarkPost,
+  removeBookmark,
+} from "redux-management";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const PostCard = (props) => {
@@ -46,7 +47,7 @@ const PostCard = (props) => {
   );
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center p-2 mb-4 border-2 border-zinc-400 relative">
+    <div className="flex flex-wrap gap-4 justify-center p-2 bg-slate-50 border-2 border-zinc-400 relative">
       <Avatar
         size="w-16 h-16"
         image={`${
@@ -97,7 +98,14 @@ const PostCard = (props) => {
             </div>
           )}
           {pathname !== "/bookmark" && (
-            <FiMessageSquare className="text-xl cursor-pointer" />
+            <FiMessageSquare
+              className="text-xl cursor-pointer"
+              onClick={() => {
+                navigate("/comment", {
+                  state: { from: { pathname }, postId: _id },
+                });
+              }}
+            />
           )}
           {pathname !== "/bookmark" && (
             <MdOutlineShare className="text-xl cursor-not-allowed" />
