@@ -5,31 +5,21 @@ import {
   EditPostCard,
   AsideBarRight,
 } from "components";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "redux/slices/postSlice";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const { allPosts, status, error, isEdit } = useSelector(
     (state) => state.post
   );
   const { foundUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
   const { username, following } = foundUser;
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(getAllPosts());
-    }
-  }, [dispatch, status]);
 
   // The below filter is used for displaying only the following user's posts
   let userFollowing = following?.map((user) => user.username);
   userFollowing?.push(username);
-  const followingUsersPost = allPosts.filter((post) =>
-    userFollowing?.includes(post.username)
-  ).reverse();
+  const followingUsersPost = allPosts
+    .filter((post) => userFollowing?.includes(post.username))
+    .reverse();
 
   return (
     <div className="grid grid-cols-8 mt-4 pb-36">

@@ -91,6 +91,38 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axios({
+        method: "post",
+        url: `/api/posts/like/${postId}`,
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      return response.data.posts;
+    } catch (error) {
+      return rejectWithValue(`Error from likePost: ${error.message}`);
+    }
+  }
+);
+
+export const dislikePost = createAsyncThunk(
+  "posts/dislikePost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axios({
+        method: "post",
+        url: `/api/posts/dislike/${postId}`,
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      return response.data.posts;
+    } catch (error) {
+      return rejectWithValue(`Error from dislikePost: ${error.message}`);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "post",
   initialState,
@@ -136,7 +168,7 @@ export const postSlice = createSlice({
     },
     [createNewPost.rejected]: (state, action) => {
       state.status = "rejected";
-      state.error = "api call (createNewPost) got rejected";
+      state.error = "api call (createNewPost) got rejected, check console";
       console.error(action.payload);
     },
     [editPost.fulfilled]: (state, action) => {
@@ -148,7 +180,7 @@ export const postSlice = createSlice({
     },
     [editPost.rejected]: (state, action) => {
       state.status = "rejected";
-      state.error = "api call (editPost) got rejected";
+      state.error = "api call (editPost) got rejected, check console";
       console.error(action.payload);
     },
     [deletePost.fulfilled]: (state, action) => {
@@ -158,7 +190,25 @@ export const postSlice = createSlice({
     },
     [deletePost.rejected]: (state, action) => {
       state.status = "rejected";
-      state.error = "api call (deletePost) got rejected";
+      state.error = "api call (deletePost) got rejected, check console";
+      console.error(action.payload);
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.allPosts = action.payload;
+    },
+    [likePost.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = "api call (likePost) got rejected, check console";
+      console.error(action.payload);
+    },
+    [dislikePost.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.allPosts = action.payload;
+    },
+    [dislikePost.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = "api call (dislikePost) got rejected, check console";
       console.error(action.payload);
     },
   },

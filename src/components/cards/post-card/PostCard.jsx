@@ -7,6 +7,7 @@ import {
   BsBookmark,
   BiDotsHorizontalRounded,
   MdModeEdit,
+  BsFillBookmarkFill,
   MdDelete,
 } from "assets/icons/icons";
 import { useState } from "react";
@@ -16,15 +17,21 @@ import {
   setIsEdit,
   deletePost,
   setContent,
+  likePost,
+  dislikePost,
 } from "redux/slices/postSlice";
+import { bookmarkPost, removeBookmark } from "redux/slices/userSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PostCard = (props) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isPostOptions, setIsPostOptions] = useState(false);
   const encodedToken = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const { isEdit, postId } = useSelector((state) => state.post);
-  const { allUsers } = useSelector((state) => state.user);
+  const { allUsers, bookmarkedPosts } = useSelector((state) => state.user);
   const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -34,6 +41,9 @@ const PostCard = (props) => {
 
   const userDetails = allUsers.find((user) => user.username === username);
   const { image, firstName, lastName } = userDetails;
+  const isLiked = likes.likedBy.find(
+    (likedUser) => likedUser?.username === foundUser.username
+  );
 
   return (
     <div className="flex flex-wrap gap-4 justify-center p-2 mb-4 border-2 border-zinc-400 relative">
@@ -46,8 +56,8 @@ const PostCard = (props) => {
       <div className="w-10/12">
         <div className="flex flex-wrap gap-2 items-center">
           <b>{`${firstName} ${lastName}`}</b>
-          <p className="text-sm text-slate-500">@{username} . time</p>
-          {foundUser?.username === username && encodedToken && (
+          <p className="text-sm text-slate-500">@{username}</p>
+          {pathname !== "/bookmark" && foundUser?.username === username && (
             <BiDotsHorizontalRounded
               className="ml-auto text-xl cursor-pointer"
               onClick={() => {
@@ -57,18 +67,60 @@ const PostCard = (props) => {
           )}
         </div>
         <p>{content}</p>
-        <div className="flex flex-wrap justify-between items-center mt-3 mb-1">
-          {foundUser?.username ===
-            likes.likedBy.filter(
-              (likedUser) => likedUser?.username === foundUser.username
-            )[0]?.username && foundUser._id ? (
-            <AiFillHeart className={`text-2xl text-red-700 cursor-pointer`} />
-          ) : (
-            <AiOutlineHeart className={`text-2xl cursor-pointer`} />
+        <div
+          className={`flex flex-wrap  ${
+            pathname === "/bookmark" ? "justify-end" : "justify-between"
+          } items-center mt-3 mb-1`}
+        >
+          {pathname !== "/bookmark" && (
+            <div className="flex gap-1 w-16">
+              {foundUser?.username === isLiked?.username && foundUser?._id ? (
+                <AiFillHeart
+                  className={`text-2xl text-red-700 cursor-pointer`}
+                  onClick={() => {
+                    encodedToken
+                      ? dispatch(dislikePost(_id))
+                      : navigate("/signin", { state: { from: { pathname } } });
+                  }}
+                />
+              ) : (
+                <AiOutlineHeart
+                  className={`text-2xl cursor-pointer`}
+                  onClick={() => {
+                    encodedToken
+                      ? dispatch(likePost(_id))
+                      : navigate("/signin", { state: { from: { pathname } } });
+                  }}
+                />
+              )}
+              <p>{likes.likeCount}</p>
+            </div>
           )}
-          <FiMessageSquare className="text-xl cursor-pointer" />
-          <MdOutlineShare className="text-xl cursor-not-allowed" />
-          <BsBookmark className="text-xl cursor-pointer" />
+          {pathname !== "/bookmark" && (
+            <FiMessageSquare className="text-xl cursor-pointer" />
+          )}
+          {pathname !== "/bookmark" && (
+            <MdOutlineShare className="text-xl cursor-not-allowed" />
+          )}
+          {bookmarkedPosts?.find((post) => post._id === _id) ? (
+            <BsFillBookmarkFill
+              className="text-xl cursor-pointer  text-slate-700"
+              onClick={() => {
+                encodedToken
+                  ? dispatch(removeBookmark(_id))
+                  : navigate("/signin", { state: { from: { pathname } } });
+              }}
+            />
+          ) : (
+            <BsBookmark
+              className="text-xl cursor-pointer"
+              onClick={() => {
+                encodedToken
+                  ? dispatch(bookmarkPost(_id))
+                  : navigate("/signin", { state: { from: { pathname } } });
+              }}
+            />
+          )}
         </div>
       </div>
       {isPostOptions && (

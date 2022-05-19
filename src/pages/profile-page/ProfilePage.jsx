@@ -8,7 +8,7 @@ import {
 } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   followUser,
   getUserDetails,
@@ -19,10 +19,12 @@ import { getPostsByUsername } from "redux/slices/postSlice";
 
 const ProfilePage = () => {
   const [isEditProfile, setIsEditProfile] = useState(false);
-
+  const encodedToken = localStorage.getItem("token");
   const {
     state: { userId },
+    pathname,
   } = useLocation();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const { allPosts, isEdit, userPosts, status, error } = useSelector(
@@ -49,6 +51,22 @@ const ProfilePage = () => {
   }, [userId, user.username, user._id, dispatch, allPosts]);
 
   const reversedUserPosts = [...userPosts]?.reverse();
+
+  const handleUnfollowUser = (userId, setFoundUser, pathname) => {
+    encodedToken
+      ? dispatch(unFollowUser({ userId, setFoundUser }))
+      : navigate("/signin", {
+          state: { from: { pathname } },
+        });
+  };
+
+  const handleFollowUser = (userId, setFoundUser, pathname) => {
+    encodedToken
+      ? dispatch(followUser({ userId, setFoundUser }))
+      : navigate("/signin", {
+          state: { from: { pathname } },
+        });
+  };
 
   return (
     <div className="grid grid-cols-8 mt-4 pb-36">
@@ -79,8 +97,8 @@ const ProfilePage = () => {
               className="text-sm  px-6 py-1 border-2 border-gray-300"
               onClick={
                 following?.find((userDetails) => userDetails._id === user._id)
-                  ? () => dispatch(unFollowUser({ userId, setFoundUser }))
-                  : () => dispatch(followUser({ userId, setFoundUser }))
+                  ? () => handleUnfollowUser(userId, setFoundUser, pathname)
+                  : () => handleFollowUser(userId, setFoundUser, pathname)
               }
             >
               {following?.find((userDetails) => userDetails._id === user._id)

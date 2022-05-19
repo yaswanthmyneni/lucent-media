@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   allUsers: [],
   user: {},
+  bookmarkedPosts: [],
 };
 
 export const getAllUsers = createAsyncThunk(
@@ -70,6 +71,52 @@ export const getUserDetails = createAsyncThunk(
   }
 );
 
+export const getAllBookmarkedPosts = createAsyncThunk(
+  "posts/getAllBookmarkedPosts",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `/api/users/bookmark/`,
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      return response.data.bookmarks;
+    } catch (error) {
+      return rejectWithValue(`Error from dislikePost: ${error.message}`);
+    }
+  }
+);
+export const bookmarkPost = createAsyncThunk(
+  "posts/bookmarkPost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axios({
+        method: "post",
+        url: `/api/users/bookmark/${postId}`,
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      return response.data.bookmarks;
+    } catch (error) {
+      return rejectWithValue(`Error from dislikePost: ${error.message}`);
+    }
+  }
+);
+export const removeBookmark = createAsyncThunk(
+  "posts/removeBookmark",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axios({
+        method: "post",
+        url: `/api/users/remove-bookmark/${postId}`,
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      return response.data.bookmarks;
+    } catch (error) {
+      return rejectWithValue(`Error from dislikePost: ${error.message}`);
+    }
+  }
+);
+
 export const editUserProfile = createAsyncThunk(
   "posts/editUserProfile",
   async (data, { rejectWithValue, dispatch }) => {
@@ -90,7 +137,7 @@ export const editUserProfile = createAsyncThunk(
 export const userSlice = createSlice({
   name: "post",
   initialState,
-  reducer: {},
+  reducers: {},
   extraReducers: {
     [getAllUsers.fulfilled]: (state, action) => {
       state.allUsers = action.payload;
@@ -117,6 +164,34 @@ export const userSlice = createSlice({
       console.error(action.payload);
     },
     [editUserProfile.rejected]: (state, action) => {
+      console.error(action.payload);
+    },
+    [getAllBookmarkedPosts.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.bookmarkedPosts = action.payload;
+    },
+    [getAllBookmarkedPosts.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error =
+        "api call (getAllBookmarkedPosts) got rejected, check console";
+      console.error(action.payload);
+    },
+    [bookmarkPost.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.bookmarkedPosts = action.payload;
+    },
+    [bookmarkPost.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = "api call (bookmarkPost) got rejected, check console";
+      console.error(action.payload);
+    },
+    [removeBookmark.fulfilled]: (state, action) => {
+      state.status = "fulfilled";
+      state.bookmarkedPosts = action.payload;
+    },
+    [removeBookmark.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = "api call (removeBookmark) got rejected, check console";
       console.error(action.payload);
     },
   },

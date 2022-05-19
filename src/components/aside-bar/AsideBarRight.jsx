@@ -34,7 +34,7 @@ const AsideBarRight = () => {
         </div>
         <div className="mt-4 flex flex-col gap-4">
           {allUsers.map((user) => {
-            if (user._id === foundUser._id) {
+            if (user._id === foundUser?._id) {
               return "";
             }
             return <ProfileCard key={user._id} user={user} />;
