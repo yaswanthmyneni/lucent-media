@@ -37,7 +37,7 @@ const PostCard = (props) => {
   const dispatch = useDispatch();
 
   const {
-    post: { _id, content, username, likes },
+    post: { _id, content, username, likes, img },
   } = props;
 
   const userDetails = allUsers.find((user) => user.username === username);
@@ -68,6 +68,11 @@ const PostCard = (props) => {
           )}
         </div>
         <p>{content}</p>
+        {img !== undefined && (
+          <div className="w-56 h-28">
+            <img src={img} alt="post" className="w-full h-full object-cover" />
+          </div>
+        )}
         <div
           className={`flex flex-wrap  ${
             pathname === "/bookmark" ? "justify-end" : "justify-between"
