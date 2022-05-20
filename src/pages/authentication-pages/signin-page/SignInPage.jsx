@@ -24,7 +24,7 @@ const SignInPage = () => {
     signInDetails.username !== "" &&
       setSignInDetails({ username: "", password: "" });
   };
-  
+
   useEffect(() => {
     if (status === "fulfilled") {
       const {
@@ -47,7 +47,7 @@ const SignInPage = () => {
         navigate(from?.pathname, { replace: true });
       }
     }
-  });
+  }, [status, location, navigate]);
 
   return (
     <main className="pt-16">
