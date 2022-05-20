@@ -25,30 +25,11 @@ const Routing = () => {
       <Route path="/mockman" element={<Mockman />} />
 
       {/* Private Routes */}
-      <Route
-        path="/home"
-        element={
-          <RequireAuth>
-            <HomePage />
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/bookmark"
-        element={
-          <RequireAuth>
-            <BookmarkPage />
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/comment"
-        element={
-          <RequireAuth>
-            <CommentPage />
-          </RequireAuth>
-        }
-      />
+      <Route element={<RequireAuth />}>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/bookmark" element={<BookmarkPage />} />
+        <Route path="/comment" element={<CommentPage />} />
+      </Route>
     </Routes>
   );
 };
