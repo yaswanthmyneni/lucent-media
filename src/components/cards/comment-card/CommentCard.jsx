@@ -24,12 +24,26 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
     votes: { downvotedBy, upvotedBy },
   } = comment;
 
+  // from react-redux
   const dispatch = useDispatch();
+
+  // from store
   const { allUsers } = useSelector((state) => state.user);
   const { foundUser } = useSelector((state) => state.auth);
 
   const commentedUser = allUsers?.find((user) => user.username === username);
   const { firstName, lastName, image } = commentedUser;
+
+  const openEditModal = (
+    dispatch,
+    setIsEditComment,
+    setContent,
+    setCommentId
+  ) => {
+    setIsEditComment(true);
+    dispatch(setCommentId(_id));
+    dispatch(setContent(text));
+  };
 
   return (
     <div className="flex flex-wrap gap-2 px-6 py-2 border border-zinc-400 bg-slate-50">
@@ -73,11 +87,14 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
           {foundUser.username === username && (
             <MdOutlineModeEdit
               className="cursor-pointer"
-              onClick={() => {
-                setIsEditComment(true);
-                dispatch(setCommentId(_id));
-                dispatch(setContent(text));
-              }}
+              onClick={() =>
+                openEditModal(
+                  dispatch,
+                  setIsEditComment,
+                  setContent,
+                  setCommentId
+                )
+              }
             />
           )}
           {foundUser.username === username && (

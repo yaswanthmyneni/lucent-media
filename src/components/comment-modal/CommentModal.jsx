@@ -5,13 +5,39 @@ import { editComment, setCommentId, setContent } from "redux-management";
 
 const CommentModal = ({ setIsEditComment, postId }) => {
   const [text, setText] = useState("");
+  
+  // from react-redux
   const dispatch = useDispatch();
+
+  // from store
   const { foundUser } = useSelector((state) => state.auth);
   const { commentId, content } = useSelector((state) => state.post);
 
   useEffect(() => {
     setText(content);
   }, [content]);
+
+  const handleEditComment = (
+    postId,
+    commentId,
+    text,
+    editComment,
+    setIsEditComment
+  ) => {
+    dispatch(editComment({ postId, commentId, text }));
+    setIsEditComment(false);
+  };
+
+  const cancleEditingComment = (
+    dispatch,
+    setIsEditComment,
+    setCommentId,
+    setContent
+  ) => {
+    setIsEditComment(false);
+    dispatch(setCommentId(null));
+    dispatch(setContent(""));
+  };
 
   return (
     <>
@@ -33,20 +59,28 @@ const CommentModal = ({ setIsEditComment, postId }) => {
         <div className="flex gap-4 justify-end">
           <button
             className="px-4 py-1 rounded text-green-50 bg-green-600 hover:bg-green-700"
-            onClick={() => {
-              dispatch(editComment({ postId, commentId, text }));
-              setIsEditComment(false);
-            }}
+            onClick={() =>
+              handleEditComment(
+                postId,
+                commentId,
+                text,
+                editComment,
+                setIsEditComment
+              )
+            }
           >
             EDIT
           </button>
           <button
             className="px-4 py-1 rounded text-green-50 bg-green-600 hover:bg-green-700"
-            onClick={() => {
-              setIsEditComment(false);
-              dispatch(setCommentId(null));
-              dispatch(setContent(""));
-            }}
+            onClick={() =>
+              cancleEditingComment(
+                dispatch,
+                setIsEditComment,
+                setCommentId,
+                setContent
+              )
+            }
           >
             CANCEL
           </button>
