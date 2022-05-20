@@ -168,6 +168,9 @@ const PostCard = (props) => {
                 <button
                   className="py-1 px-4 border border-red-600 text-red-600 rounded"
                   onClick={() => {
+                    if (pathname === "/comment") {
+                      navigate("/");
+                    }
                     dispatch(deletePost(postId));
                     setIsDelete(!isDelete);
                   }}
