@@ -50,6 +50,14 @@ export const userSlice = createSlice({
     [unFollowUser.rejected]: (state, action) => {
       console.error(action.payload);
     },
+    [editUserProfile.fulfilled]: (state, action) => {
+      state.allUsers = [...state.allUsers].map((user) => {
+        if (user._id === action.payload._id) {
+          return action.payload;
+        }
+        return user;
+      });
+    },
     [editUserProfile.rejected]: (state, action) => {
       console.error(action.payload);
     },

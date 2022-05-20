@@ -42,6 +42,7 @@ export const editUserProfile = createAsyncThunk(
         data: { userData: { ...data.profileData } },
       });
       dispatch(data.setFoundUser(response.data.user));
+      return response.data.user;
     } catch (error) {
       return rejectWithValue(`Error from editUserProfile: ${error.message}`);
     }
