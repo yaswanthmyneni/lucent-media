@@ -20,7 +20,11 @@ const initialState = {
 export const userSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    setAllUsers: (state, action) => {
+      state.allUsers[state.allUsers.length] = action.payload;
+    },
+  },
   extraReducers: {
     [getAllUsers.fulfilled]: (state, action) => {
       state.allUsers = action.payload;
@@ -79,5 +83,7 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const { setAllUsers } = userSlice.actions;
 
 export default userSlice.reducer;
