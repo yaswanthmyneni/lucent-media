@@ -4,6 +4,7 @@ import {
   Avatar,
   CommentCard,
   CommentModal,
+  EditPostCard,
   PostCard,
 } from "components";
 import { FaArrowLeft } from "assets/icons/icons";
@@ -20,16 +21,20 @@ const CommentPage = () => {
   const [text, setText] = useState("");
   const [isEditComment, setIsEditComment] = useState(false);
 
+  // from react-router-dom
   const {
     state: {
       from: { pathname },
-      postId
+      postId,
     },
   } = useLocation();
   const navigate = useNavigate();
 
+  // from react-redux
   const dispatch = useDispatch();
-  const { singlePost, commentsForAPost, allPosts } = useSelector(
+
+  // from store
+  const { singlePost, commentsForAPost, allPosts, isEdit } = useSelector(
     (state) => state.post
   );
   const { foundUser } = useSelector((state) => state.auth);
@@ -53,7 +58,7 @@ const CommentPage = () => {
           />
           <h2 className="font-medium text-2xl">Post</h2>
         </div>
-        {singlePost?._id && <PostCard post={post} />}
+        {post?._id && <PostCard post={post} />}
         <div className="flex flex-wrap justify-between px-6 py-2 border border-zinc-400 bg-slate-50">
           <Avatar size="h-10 w-10" image={foundUser?.image} />
           <input
@@ -68,8 +73,10 @@ const CommentPage = () => {
           <button
             className="px-4 py-1 rounded text-green-50 bg-green-600 hover:bg-green-700"
             onClick={() => {
-              dispatch(addCommentToAPost({ postId, text }));
-              setText("");
+              if (text !== "") {
+                dispatch(addCommentToAPost({ postId, text }));
+                setText("");
+              }
             }}
           >
             POST
@@ -89,6 +96,7 @@ const CommentPage = () => {
       {isEditComment && (
         <CommentModal setIsEditComment={setIsEditComment} postId={postId} />
       )}
+      {isEdit && <EditPostCard />}
     </div>
   );
 };
