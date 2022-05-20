@@ -7,6 +7,7 @@ import {
   ProfilePage,
   BookmarkPage,
   ExplorePage,
+  CommentPage,
 } from "pages";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
@@ -23,22 +24,12 @@ const Routing = () => {
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/mockman" element={<Mockman />} />
 
-      <Route
-        path="/home"
-        element={
-          <RequireAuth>
-            <HomePage />
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/bookmark"
-        element={
-          <RequireAuth>
-            <BookmarkPage />
-          </RequireAuth>
-        }
-      />
+      {/* Private Routes */}
+      <Route element={<RequireAuth />}>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/bookmark" element={<BookmarkPage />} />
+        <Route path="/comment" element={<CommentPage />} />
+      </Route>
     </Routes>
   );
 };

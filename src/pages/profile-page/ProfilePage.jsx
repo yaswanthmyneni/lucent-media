@@ -13,9 +13,9 @@ import {
   followUser,
   getUserDetails,
   unFollowUser,
-} from "redux/slices/userSlice";
-import { setFoundUser } from "redux/slices/authSlice";
-import { getPostsByUsername } from "redux/slices/postSlice";
+  setFoundUser,
+  getPostsByUsername,
+} from "redux-management";
 
 const ProfilePage = () => {
   const [isEditProfile, setIsEditProfile] = useState(false);
@@ -56,7 +56,7 @@ const ProfilePage = () => {
     encodedToken
       ? dispatch(unFollowUser({ userId, setFoundUser }))
       : navigate("/signin", {
-          state: { from: { pathname } },
+          state: { from: { pathname }, userId },
         });
   };
 
@@ -64,7 +64,7 @@ const ProfilePage = () => {
     encodedToken
       ? dispatch(followUser({ userId, setFoundUser }))
       : navigate("/signin", {
-          state: { from: { pathname } },
+          state: { from: { pathname }, userId },
         });
   };
 
@@ -140,11 +140,11 @@ const ProfilePage = () => {
         ) : status === "rejected" ? (
           <p>{error}</p>
         ) : (
-          <>
+          <div className="flex flex-col gap-2">
             {reversedUserPosts?.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
-          </>
+          </div>
         )}
         {isEditProfile && <EditProfile setIsEditProfile={setIsEditProfile} />}
       </main>

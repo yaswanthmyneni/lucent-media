@@ -1,8 +1,7 @@
 import { Avatar } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { followUser } from "redux/slices/userSlice";
-import { setFoundUser } from "redux/slices/authSlice";
+import { followUser, setFoundUser } from "redux-management";
 
 const ProfileCard = ({ user }) => {
   const { _id, firstName, lastName, username, image } = user;

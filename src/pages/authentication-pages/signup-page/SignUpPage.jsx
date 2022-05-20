@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaAngleRight } from "assets/icons/icons";
 import { useState, Fragment } from "react";
-import { signUpUser } from "redux/slices/authSlice";
+import { signUpUser, setAllUsers } from "redux-management";
 import { useDispatch } from "react-redux";
 
 const SignUpPage = () => {
@@ -28,10 +28,10 @@ const SignUpPage = () => {
     "confirmPassword",
   ];
 
-  const handleSignUp = (e, userDetails, location) => {
+  const handleSignUp = (e, userDetails, setAllUsers, location) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      dispatch(signUpUser(userDetails));
+      dispatch(signUpUser({userDetails, setAllUsers}));
       setUserDetails({ username: "", password: "" });
       navigate(location?.state?.from?.pathname, { replace: true });
     } else {
@@ -69,7 +69,7 @@ const SignUpPage = () => {
           <p className="text-red-600">{error}</p>
           <button
             className="px-12 py-1 mt-4 bg-green-600 hover:bg-green-800 text-gray-50"
-            onClick={(e) => handleSignUp(e, userDetails, location)}
+            onClick={(e) => handleSignUp(e, userDetails,setAllUsers, location)}
           >
             SignUp
           </button>

@@ -1,7 +1,7 @@
 import { Avatar } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editPost } from "redux/slices/postSlice";
+import { editPost, setIsEdit } from "redux-management";
 
 const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");
@@ -29,6 +29,11 @@ const EditPostCard = () => {
     setEditedContent("");
   };
 
+  const cancelEditPost = (dispatch, setEditedContent, setIsEdit) => {
+    dispatch(setIsEdit(false));
+    setEditedContent("");
+  };
+
   return (
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-300"></div>
@@ -36,15 +41,15 @@ const EditPostCard = () => {
         <Avatar size="w-16 h-16" image={image} />
         <div className="w-10/12">
           <textarea
-            className="p-1 w-full bg-slate-200 focus:outline-none"
+            className="p-1 w-full bg-slate-100 focus:outline-none"
             rows="5"
             placeholder="what's in your mind?"
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
           ></textarea>
-          <div className="text-right">
+          <div className="flex gap-2 justify-end mt-2">
             <button
-              className={`px-8 py-2 ml-auto rounded ${
+              className={`px-6 py-1 text-lg rounded ${
                 editedContent === "" ? "cursor-not-allowed" : ""
               } bg-green-600 hover:bg-green-700 text-slate-100`}
               onClick={() =>
@@ -57,6 +62,14 @@ const EditPostCard = () => {
               }
             >
               Edit post
+            </button>
+            <button
+              className={`px-6 py-1 text-lg rounded border-2 border-green-600 text-green-600 bg-slate-50`}
+              onClick={() =>
+                cancelEditPost(dispatch, setEditedContent, setIsEdit)
+              }
+            >
+              cancel
             </button>
           </div>
         </div>
