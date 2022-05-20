@@ -8,6 +8,7 @@ export { NewPostCard } from "./cards/new-post-card/NewPostCard";
 export { EditPostCard } from "./cards/edit-post-card/EditPostCard";
 export { EditProfile } from "./edit-profile/EditProfile";
 export { PostCard } from "./cards/post-card/PostCard";
+export { FilterCard } from "./cards/filter-card/FilterCard";
 export { ProfileCard } from "./cards/profile-card/ProfileCard";
 export { CommentCard } from "./cards/comment-card/CommentCard";
 export { Routing } from "./routes/Routing";
