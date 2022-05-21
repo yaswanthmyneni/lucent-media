@@ -26,6 +26,7 @@ export {
   setIsEdit,
   setContent,
   setCommentId,
+  setIsDelete,
 } from "./slices/postSlice/postSlice";
 
 export {

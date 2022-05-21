@@ -5,6 +5,7 @@ import {
   PostCard,
   EditProfile,
   EditPostCard,
+  DeleteModal,
 } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +28,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { allPosts, isEdit, userPosts, status, error } = useSelector(
+  const { allPosts, isEdit, isDelete, userPosts, status, error } = useSelector(
     (state) => state.post
   );
   const { foundUser } = useSelector((state) => state.auth);
@@ -150,6 +151,7 @@ const ProfilePage = () => {
       </main>
       <AsideBarRight />
       {isEdit && <EditPostCard />}
+      {isDelete && <DeleteModal />}
     </div>
   );
 };

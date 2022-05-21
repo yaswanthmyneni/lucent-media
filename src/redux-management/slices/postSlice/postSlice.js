@@ -30,6 +30,7 @@ const initialState = {
   commentId: null,
   sortByDate: "new",
   filterByLikes: "non-trending",
+  isDelete: false,
 };
 
 export const postSlice = createSlice({
@@ -54,6 +55,9 @@ export const postSlice = createSlice({
     setTrending: (state, action) => {
       state.filterByLikes = action.payload;
     },
+    setIsDelete: (state, action) => {
+      state.isDelete = action.payload;
+    }
   },
   extraReducers: {
     [getAllPosts.pending]: (state) => {
@@ -206,6 +210,7 @@ export const {
   setContent,
   setCommentId,
   setDate,
+  setIsDelete,
   setTrending,
 } = postSlice.actions;
 

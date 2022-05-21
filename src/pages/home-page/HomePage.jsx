@@ -5,15 +5,23 @@ import {
   EditPostCard,
   AsideBarRight,
   FilterCard,
+  DeleteModal,
 } from "components";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const { allPosts, status, error, isEdit, sortByDate, filterByLikes } =
-    useSelector((state) => state.post);
+  const {
+    allPosts,
+    status,
+    error,
+    isEdit,
+    isDelete,
+    sortByDate,
+    filterByLikes,
+  } = useSelector((state) => state.post);
   const { foundUser } = useSelector((state) => state.auth);
   const { username, following } = foundUser;
-
+console.log(isDelete);
   const filterByTrending = (array, value) => {
     const posts = [...array];
     if (value === "trending") {
@@ -70,6 +78,7 @@ const HomePage = () => {
       </main>
       <AsideBarRight />
       {isEdit && <EditPostCard />}
+      {isDelete && <DeleteModal />}
     </div>
   );
 };

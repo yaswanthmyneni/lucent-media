@@ -71,7 +71,7 @@ export const editPost = createAsyncThunk(
         method: "post",
         url: `/api/posts/edit/${data.postId}`,
         headers: { authorization: localStorage.getItem("token") },
-        data: { postData: { content: data.editedContent } },
+        data: { postData: { content: data.editedContent, img: data.img } },
       });
       return response.data.posts;
     } catch (error) {

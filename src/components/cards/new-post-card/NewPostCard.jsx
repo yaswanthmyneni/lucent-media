@@ -17,7 +17,7 @@ const NewPostCard = () => {
   const dispatch = useDispatch();
 
   const handlePost = (encodedToken, content, setContent, img, setImg) => {
-    if (encodedToken) {
+    if (encodedToken && content.match(/^\s+$/) === null) {
       dispatch(createNewPost({ content, img }));
       setContent("");
       setImg(null);

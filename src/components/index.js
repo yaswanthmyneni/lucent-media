@@ -5,6 +5,7 @@ export { AsideBarRight } from "./aside-bar/AsideBarRight";
 export { Avatar } from "./avatar/Avatar";
 export { CommentModal } from "./comment-modal/CommentModal";
 export { NewPostCard } from "./cards/new-post-card/NewPostCard";
+export { DeleteModal } from "./delete-modal/DeleteModal";
 export { EditPostCard } from "./cards/edit-post-card/EditPostCard";
 export { EditProfile } from "./edit-profile/EditProfile";
 export { PostCard } from "./cards/post-card/PostCard";
