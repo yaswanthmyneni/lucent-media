@@ -16,7 +16,7 @@ const ProfileCard = ({ user }) => {
 
   return (
     <div className="flex flex-wrap gap-4 items-center">
-      <Avatar size="w-9 h-9" image={image} />
+      <Avatar className="w-9 h-9" image={image} />
       <div>
         <b
           className="cursor-pointer"

@@ -36,6 +36,7 @@ const ProfilePage = () => {
   const {
     _id,
     image,
+    backgroundImage,
     bio,
     username,
     firstName,
@@ -74,15 +75,26 @@ const ProfilePage = () => {
       <AsideBarLeft />
       <main className="col-start-3 col-end-7">
         <div className="flex flex-col gap-2 items-center">
-          <Avatar
-            size="w-36 h-36 mt-2 mb-4"
-            image={`${userId === _id ? image : user.image}`}
-          />
-          <b className="text-xl">{`${
-            userId === _id
-              ? `${firstName} ${lastName}`
-              : `${user.firstName} ${user.lastName}`
-          }`}</b>
+          <div className="w-full relative">
+            <div className="w-full h-56">
+              <img
+                src={backgroundImage}
+                alt="backgroundImage"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <Avatar
+              className="w-36 h-36 rounded-full border-2 shadow-sm shadow-gray-700 border-white absolute -bottom-24 left-4"
+              image={`${userId === _id ? image : user.image}`}
+            />
+          </div>
+          <b className="text-xl">
+            {`${
+              userId === _id
+                ? `${firstName} ${lastName}`
+                : `${user.firstName} ${user.lastName}`
+            }`}
+          </b>
           <p className="text-lg text-slate-500">
             @{`${userId === _id ? username : user.username}`}
           </p>

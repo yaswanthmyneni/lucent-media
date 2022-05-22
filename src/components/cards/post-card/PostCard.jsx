@@ -48,7 +48,7 @@ const PostCard = (props) => {
   return (
     <div className="flex flex-wrap gap-4 justify-center p-2 bg-slate-50 border-2 border-zinc-400 relative">
       <Avatar
-        size="w-16 h-16"
+        className="w-16 h-16"
         image={`${
           foundUser.username === userDetails.username ? foundUser.image : image
         }`}

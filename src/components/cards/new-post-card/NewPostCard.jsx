@@ -27,7 +27,7 @@ const NewPostCard = () => {
 
   return (
     <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400">
-      <Avatar size="w-16 h-16" image={foundUser.image} />
+      <Avatar className="w-16 h-16" image={foundUser.image} />
       <div className="w-10/12">
         <textarea
           className="p-1 w-full bg-slate-200 focus:outline-none"

@@ -42,7 +42,7 @@ const EditPostCard = () => {
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-300"></div>
       <div className="py-4 px-2 mb-4 w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-400">
-        <Avatar size="w-16 h-16" image={image} />
+        <Avatar className="w-16 h-16" image={image} />
         <div className="w-10/12">
           <textarea
             className="p-1 w-full bg-slate-100 focus:outline-none"

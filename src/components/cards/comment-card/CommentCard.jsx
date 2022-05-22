@@ -47,7 +47,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
 
   return (
     <div className="flex flex-wrap gap-2 px-6 py-2 border border-zinc-400 bg-slate-50">
-      <Avatar size="w-10 h-10" image={image} />
+      <Avatar className="w-10 h-10" image={image} />
       <div className="w-11/12">
         <div className="flex gap-2 items-center">
           <b>{`${firstName} ${lastName}`}</b>
