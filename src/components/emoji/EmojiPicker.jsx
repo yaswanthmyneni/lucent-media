@@ -10,7 +10,10 @@ const EmojiPicker = ({ setContent }) => {
 
   useEffect(() => {
     if (chosenEmoji) {
-      setContent((prev) => prev + `${chosenEmoji} `);
+      setContent((prev) => ({
+        ...prev,
+        content: prev.content + `${chosenEmoji} `,
+      }));
       setChosenEmoji(null);
     }
   }, [chosenEmoji, setChosenEmoji, setContent]);

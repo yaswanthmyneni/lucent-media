@@ -1,27 +1,46 @@
-import {
-  BiImageAdd,
-  AiOutlineFileGif,
-  BsEmojiSunglasses,
-} from "assets/icons/icons";
+import { BiImageAdd, BsEmojiSunglasses, FaVideo } from "assets/icons/icons";
 import { Avatar, EmojiPicker } from "components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewPost } from "redux-management";
 
 const NewPostCard = () => {
-  const [content, setContent] = useState("");
-  const [img, setImg] = useState(null);
-  const [isEmoji, setIsEmoji] = useState(false);
+  const [data, setData] = useState({
+    content: "",
+    img: null,
+    video: null,
+    isEmoji: false,
+  });
+  const { content, img, video, isEmoji } = data;
   const encodedToken = localStorage.getItem("token");
 
   const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const handlePost = (encodedToken, content, setContent, img, setImg) => {
+  const handlePost = (encodedToken, content, setData, img, video) => {
     if (encodedToken && content.match(/^\s+$/) === null) {
-      dispatch(createNewPost({ content, img }));
-      setContent("");
-      setImg(null);
+      dispatch(createNewPost({ content, img, video }));
+      setData((prev) => ({ ...prev, content: "", img: null, video: null }));
+    }
+  };
+
+  const handleImageUpload = (e, setData) => {
+    if (e.target.files[0].type.split("/")[0] === "image") {
+      const image = URL.createObjectURL(e.target.files[0]);
+      setData((prev) => ({
+        ...prev,
+        img: image,
+      }));
+    }
+  };
+
+  const handleVideoUpload = (e, setData, video) => {
+    if (e.target.files[0].type.split("/")[0] === "video") {
+      const video = URL.createObjectURL(e.target.files[0]);
+      setData((prev) => ({
+        ...prev,
+        video: { video, type: e.target.files[0].type },
+      }));
     }
   };
 
@@ -34,44 +53,70 @@ const NewPostCard = () => {
           rows="5"
           placeholder="what's in your mind?"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e) =>
+            setData((prev) => ({ ...prev, content: e.target.value }))
+          }
         ></textarea>
-        {img !== null && (
-          <div className="w-56 h-28">
-            <img src={img} alt="post" className="w-full h-full object-cover" />
-          </div>
-        )}
+        <div className="flex gap-1 flex-wrap">
+          {img !== null && (
+            <div className="w-56 h-28">
+              <img
+                src={img}
+                alt="post"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+          {video !== null && (
+            <div className="w-64 mb-4">
+              <video controls>
+                <source src={video.video} type={video.type} />
+                Sorry, your browser doesn't support embedded video.
+              </video>
+            </div>
+          )}
+        </div>
         <div className="flex flex-wrap items-start text-slate-600">
           <div className="flex flex-wrap gap-4 items-center">
-            <label htmlFor="image-upload-at-post" className="cursor-pointer">
+            <label htmlFor="upload-image" className="cursor-pointer">
               <input
                 type="file"
-                id="image-upload-at-post"
+                id="upload-image"
                 className="hidden"
-                onChange={(e) => {
-                  const image = URL.createObjectURL(e.target.files[0]);
-                  setImg(image);
-                }}
+                onChange={(e) => handleImageUpload(e, setData)}
               />
               <BiImageAdd className="text-3xl" />
             </label>
-            <AiOutlineFileGif className="text-2xl cursor-not-allowed" />
+            <label htmlFor="upload-video-at" className="cursor-pointer">
+              <input
+                type="file"
+                id="upload-video-at"
+                className="hidden"
+                onChange={(e) => handleVideoUpload(e, setData)}
+              />
+              <FaVideo className="text-2xl" />
+            </label>
             <BsEmojiSunglasses
               className="text-2xl cursor-pointer"
-              onClick={() => setIsEmoji(!isEmoji)}
+              onClick={() =>
+                setData((prev) => ({
+                  ...prev,
+                  isEmoji: !isEmoji,
+                }))
+              }
             />
           </div>
           <button
             className={`px-8 py-2 ml-auto rounded bg-green-600 hover:bg-green-700 text-slate-100`}
             onClick={() =>
-              handlePost(encodedToken, content, setContent, img, setImg)
+              handlePost(encodedToken, content, setData, img, video)
             }
             disabled={!content}
           >
             Post
           </button>
         </div>
-        {isEmoji && <EmojiPicker setContent={setContent} />}
+        {isEmoji && <EmojiPicker setContent={setData} />}
       </div>
     </div>
   );
