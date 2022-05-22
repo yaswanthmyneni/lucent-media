@@ -26,6 +26,9 @@ export const authSlice = createSlice({
     [logInUser.rejected]: (state, action) => {
       console.error(action.payload);
     },
+    [signUpUser.pending]: (state) => {
+      state.status = 'pending';
+    },
     [signUpUser.fulfilled]: (state, action) => {
       localStorage.setItem("token", action.payload.token);
       state.foundUser = action.payload.createdUser;

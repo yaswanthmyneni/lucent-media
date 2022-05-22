@@ -1,6 +1,7 @@
 import {
   AsideBarLeft,
   AsideBarRight,
+  DeleteModal,
   EditPostCard,
   PostCard,
 } from "components";
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "redux-management";
 
 const ExplorePage = () => {
-  const { allPosts, status, error, isEdit } = useSelector(
+  const { allPosts, status, error, isEdit, isDelete } = useSelector(
     (state) => state.post
   );
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const ExplorePage = () => {
       </main>
       <AsideBarRight />
       {isEdit && <EditPostCard />}
+      {isDelete && <DeleteModal />}
     </div>
   );
 };

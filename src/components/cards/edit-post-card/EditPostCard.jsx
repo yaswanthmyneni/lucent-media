@@ -5,6 +5,7 @@ import { editPost, setIsEdit } from "redux-management";
 
 const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");
+  const [img, setImg] = useState("");
   const dispatch = useDispatch();
 
   const { postId, content } = useSelector((state) => state.post);
@@ -17,6 +18,7 @@ const EditPostCard = () => {
 
   const handleEditPost = (
     editedContent,
+    img,
     editPost,
     setEditedContent,
     dispatch
@@ -25,7 +27,7 @@ const EditPostCard = () => {
       // TODO - will implement toast here
       return console.log("please enter any input");
     }
-    dispatch(editPost({ editedContent, postId }));
+    dispatch(editPost({ editedContent, img, postId }));
     setEditedContent("");
   };
 
@@ -47,6 +49,16 @@ const EditPostCard = () => {
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
           ></textarea>
+          <p>Image:</p>
+          <label htmlFor="image-update">
+            <input
+              type="file"
+              onChange={(e) => {
+                const image = URL.createObjectURL(e.target.files[0]);
+                setImg(image);
+              }}
+            />
+          </label>
           <div className="flex gap-2 justify-end mt-2">
             <button
               className={`px-6 py-1 text-lg rounded ${
@@ -55,6 +67,7 @@ const EditPostCard = () => {
               onClick={() =>
                 handleEditPost(
                   editedContent,
+                  img,
                   editPost,
                   setEditedContent,
                   dispatch

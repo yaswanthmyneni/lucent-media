@@ -4,6 +4,7 @@ import {
   Avatar,
   CommentCard,
   CommentModal,
+  DeleteModal,
   EditPostCard,
   PostCard,
 } from "components";
@@ -34,9 +35,8 @@ const CommentPage = () => {
   const dispatch = useDispatch();
 
   // from store
-  const { singlePost, commentsForAPost, allPosts, isEdit } = useSelector(
-    (state) => state.post
-  );
+  const { singlePost, commentsForAPost, allPosts, isEdit, isDelete } =
+    useSelector((state) => state.post);
   const { foundUser } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const CommentPage = () => {
           <button
             className="px-4 py-1 rounded text-green-50 bg-green-600 hover:bg-green-700"
             onClick={() => {
-              if (text !== "") {
+              if (text !== "" && text.match(/^\s+$/) === null) {
                 dispatch(addCommentToAPost({ postId, text }));
                 setText("");
               }
@@ -97,6 +97,7 @@ const CommentPage = () => {
         <CommentModal setIsEditComment={setIsEditComment} postId={postId} />
       )}
       {isEdit && <EditPostCard />}
+      {isDelete && <DeleteModal />}
     </div>
   );
 };
