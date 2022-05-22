@@ -21,7 +21,7 @@ const HomePage = () => {
   } = useSelector((state) => state.post);
   const { foundUser } = useSelector((state) => state.auth);
   const { username, following } = foundUser;
-console.log(isDelete);
+
   const filterByTrending = (array, value) => {
     const posts = [...array];
     if (value === "trending") {

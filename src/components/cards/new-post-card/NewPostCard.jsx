@@ -3,7 +3,7 @@ import {
   AiOutlineFileGif,
   BsEmojiSunglasses,
 } from "assets/icons/icons";
-import { Avatar } from "components";
+import { Avatar, EmojiPicker } from "components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewPost } from "redux-management";
@@ -11,6 +11,7 @@ import { createNewPost } from "redux-management";
 const NewPostCard = () => {
   const [content, setContent] = useState("");
   const [img, setImg] = useState(null);
+  const [isEmoji, setIsEmoji] = useState(false);
   const encodedToken = localStorage.getItem("token");
 
   const { foundUser } = useSelector((state) => state.auth);
@@ -55,7 +56,10 @@ const NewPostCard = () => {
               <BiImageAdd className="text-3xl" />
             </label>
             <AiOutlineFileGif className="text-2xl cursor-not-allowed" />
-            <BsEmojiSunglasses className="text-2xl cursor-not-allowed" />
+            <BsEmojiSunglasses
+              className="text-2xl cursor-pointer"
+              onClick={() => setIsEmoji(!isEmoji)}
+            />
           </div>
           <button
             className={`px-8 py-2 ml-auto rounded bg-green-600 hover:bg-green-700 text-slate-100`}
@@ -67,6 +71,7 @@ const NewPostCard = () => {
             Post
           </button>
         </div>
+        {isEmoji && <EmojiPicker setContent={setContent} />}
       </div>
     </div>
   );

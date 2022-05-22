@@ -1,11 +1,13 @@
-import { Avatar } from "components";
+import { Avatar, EmojiPicker } from "components";
 import { useEffect, useState } from "react";
+import { BsEmojiSunglasses } from "assets/icons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost, setIsEdit } from "redux-management";
 
 const EditPostCard = () => {
   const [editedContent, setEditedContent] = useState("");
   const [img, setImg] = useState("");
+  const [isEmoji, setIsEmoji] = useState(false);
   const dispatch = useDispatch();
 
   const { postId, content } = useSelector((state) => state.post);
@@ -39,7 +41,7 @@ const EditPostCard = () => {
   return (
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-300"></div>
-      <div className="py-4 px-2 mb-4 w-8/12 fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-400">
+      <div className="py-4 px-2 mb-4 w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-400">
         <Avatar size="w-16 h-16" image={image} />
         <div className="w-10/12">
           <textarea
@@ -52,6 +54,7 @@ const EditPostCard = () => {
           <p>Image:</p>
           <label htmlFor="image-update">
             <input
+              className="mb-4"
               type="file"
               onChange={(e) => {
                 const image = URL.createObjectURL(e.target.files[0]);
@@ -59,9 +62,14 @@ const EditPostCard = () => {
               }}
             />
           </label>
-          <div className="flex gap-2 justify-end mt-2">
+          {isEmoji && <EmojiPicker setContent={setEditedContent} />}
+          <div className="flex gap-2 items-center mt-2">
+            <BsEmojiSunglasses
+              className="text-2xl cursor-pointer"
+              onClick={() => setIsEmoji(!isEmoji)}
+            />
             <button
-              className={`px-6 py-1 text-lg rounded ${
+              className={`px-6 py-1 ml-auto text-lg rounded ${
                 editedContent === "" ? "cursor-not-allowed" : ""
               } bg-green-600 hover:bg-green-700 text-slate-100`}
               onClick={() =>

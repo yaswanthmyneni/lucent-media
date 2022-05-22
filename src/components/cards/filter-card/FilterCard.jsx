@@ -13,7 +13,7 @@ const FilterCard = () => {
       <select
         name="filterByLikes"
         id="filterByLikes"
-        className="bg-red-500 text-green-50 py-2 outline-none rounded border-2 border-green-400"
+        className="bg-red-500 text-green-50 py-2 cursor-pointer outline-none rounded border-2 border-green-400"
         value={filterByLikes}
         onChange={(e) => {
           dispatch(setTrending(e.target.value));
@@ -25,7 +25,7 @@ const FilterCard = () => {
       <select
         name="sortByDate"
         id="sortByDate"
-        className="bg-red-500 text-green-50 py-2 outline-none rounded border-2 border-green-400"
+        className="bg-red-500 text-green-50 py-2 cursor-pointer outline-none rounded border-2 border-green-400"
         value={sortByDate}
         onChange={(e) => {
           dispatch(setDate(e.target.value));
