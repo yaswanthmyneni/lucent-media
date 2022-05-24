@@ -1,6 +1,6 @@
-const Avatar = ({ size, image }) => {
+const Avatar = ({ className, image }) => {
   return (
-    <div className={`${size}`}>
+    <div className={`${className}`}>
       <img
         className="w-full h-full object-cover rounded-full bg-white"
         src={image}

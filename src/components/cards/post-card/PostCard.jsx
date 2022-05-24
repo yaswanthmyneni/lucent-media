@@ -36,7 +36,7 @@ const PostCard = (props) => {
   const dispatch = useDispatch();
 
   const {
-    post: { _id, content, username, likes, img },
+    post: { _id, content, username, likes, img, video },
   } = props;
 
   const userDetails = allUsers.find((user) => user.username === username);
@@ -48,7 +48,7 @@ const PostCard = (props) => {
   return (
     <div className="flex flex-wrap gap-4 justify-center p-2 bg-slate-50 border-2 border-zinc-400 relative">
       <Avatar
-        size="w-16 h-16"
+        className="w-16 h-16"
         image={`${
           foundUser.username === userDetails.username ? foundUser.image : image
         }`}
@@ -67,11 +67,25 @@ const PostCard = (props) => {
           )}
         </div>
         <p>{content}</p>
-        {img && (
-          <div className="w-56 h-28">
-            <img src={img} alt="post" className="w-full h-full object-cover" />
-          </div>
-        )}
+        <div className="flex flex-col gap-1">
+          {img && (
+            <div className="w-full h-64">
+              <img
+                src={img}
+                alt="post"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+          {video && (
+            <div className="w-full mb-2">
+              <video controls>
+                <source src={video.video} type={video.type} />
+                Sorry, your browser doesn't support embedded video.
+              </video>
+            </div>
+          )}
+        </div>
         <div
           className={`flex flex-wrap  ${
             pathname === "/bookmark" ? "justify-end" : "justify-between"

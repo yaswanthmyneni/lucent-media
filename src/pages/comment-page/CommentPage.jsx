@@ -60,7 +60,7 @@ const CommentPage = () => {
         </div>
         {post?._id && <PostCard post={post} />}
         <div className="flex flex-wrap justify-between px-6 py-2 border border-zinc-400 bg-slate-50">
-          <Avatar size="h-10 w-10" image={foundUser?.image} />
+          <Avatar className="h-10 w-10" image={foundUser?.image} />
           <input
             className="outline-none px-1 py-2 w-9/12 bg-slate-200 "
             type="text"

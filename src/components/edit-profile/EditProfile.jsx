@@ -8,6 +8,7 @@ const EditProfile = ({ setIsEditProfile }) => {
     image: "",
     bio: "",
     portfolioLink: "",
+    backgroundImage: "",
   });
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const EditProfile = ({ setIsEditProfile }) => {
           className="text-2xl absolute top-3 right-4 cursor-pointer"
           onClick={() => setIsEditProfile(false)}
         />
-        <label className="mb-2 block">Upload image:</label>
+        <label className="mb-2 block">Upload Profile dp:</label>
         <input
           type="file"
           className="mb-4"
@@ -33,6 +34,17 @@ const EditProfile = ({ setIsEditProfile }) => {
             setProfileData((prev) => ({
               ...prev,
               image: URL.createObjectURL(e.target.files[0]),
+            }));
+          }}
+        />
+        <label className="mb-2 block">Upload background image:</label>
+        <input
+          type="file"
+          className="mb-4"
+          onChange={(e) => {
+            setProfileData((prev) => ({
+              ...prev,
+              backgroundImage: URL.createObjectURL(e.target.files[0]),
             }));
           }}
         />

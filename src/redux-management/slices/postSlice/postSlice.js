@@ -93,6 +93,9 @@ export const postSlice = createSlice({
       state.error = "api call (createNewPost) got rejected, check console";
       console.error(action.payload);
     },
+    [editPost.pending]: (state) => {
+      state.status = "loading";
+    },
     [editPost.fulfilled]: (state, action) => {
       state.status = "fulfilled";
       state.allPosts = action.payload;

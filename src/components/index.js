@@ -8,6 +8,7 @@ export { NewPostCard } from "./cards/new-post-card/NewPostCard";
 export { DeleteModal } from "./delete-modal/DeleteModal";
 export { EditPostCard } from "./cards/edit-post-card/EditPostCard";
 export { EditProfile } from "./edit-profile/EditProfile";
+export { EmojiPicker } from "./emoji/EmojiPicker";
 export { PostCard } from "./cards/post-card/PostCard";
 export { FilterCard } from "./cards/filter-card/FilterCard";
 export { ProfileCard } from "./cards/profile-card/ProfileCard";
