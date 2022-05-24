@@ -76,24 +76,24 @@ const EditPostCard = () => {
               setData((prev) => ({ ...prev, content: e.target.value }))
             }
           ></textarea>
-          <p>Image:</p>
-          <label htmlFor="upload-image">
-            <input
-              id="upload-image"
-              className="mb-4"
-              type="file"
-              onChange={(e) => handleImageUpload(e, setData)}
-            />
+          <label htmlFor="upload-image" className="block">
+            Image:
           </label>
-          <p>Video:</p>
-          <label htmlFor="upload-video">
-            <input
-              id="upload-video"
-              className="mb-4"
-              type="file"
-              onChange={(e) => handleVideoUpload(e, setData)}
-            />
+          <input
+            id="upload-image"
+            className="mb-4"
+            type="file"
+            onChange={(e) => handleImageUpload(e, setData)}
+          />
+          <label htmlFor="upload-video" className="block">
+            Video:
           </label>
+          <input
+            id="upload-video"
+            className="mb-4"
+            type="file"
+            onChange={(e) => handleVideoUpload(e, setData)}
+          />
           {isEmoji && <EmojiPicker setContent={setData} />}
           <div className="flex gap-2 items-center mt-2">
             <BsEmojiSunglasses
