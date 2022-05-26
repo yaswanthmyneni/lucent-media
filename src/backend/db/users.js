@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
-import adarshbalika from "assets/images/balika.svg";
+import adarshbalika from "assets/images/balika.jpeg";
+import bgImage from "assets/images/bg.jpeg";
 import shubhamsoni from "assets/images/soni.jpg";
 import yaswanth from "assets/images/mock.jpg";
 
@@ -18,6 +19,7 @@ export const users = [
     password: "adarshBalika123",
     bio: "about",
     image: adarshbalika,
+    backgroundImage: bgImage,
     portfolioLink: "adarshbalika.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
@@ -30,6 +32,7 @@ export const users = [
     password: "shubhamsoni123",
     bio: "about",
     image: shubhamsoni,
+    backgroundImage: bgImage,
     portfolioLink: "shubhamsoni.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
@@ -42,6 +45,7 @@ export const users = [
     password: "yaswanthmyneni123",
     bio: "about",
     image: yaswanth,
+    backgroundImage: bgImage,
     portfolioLink: "yaswanthmyneni.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),

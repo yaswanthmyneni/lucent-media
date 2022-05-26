@@ -76,8 +76,8 @@ export const postSlice = createSlice({
       state.status = "loading";
     },
     [getPostsByUsername.fulfilled]: (state, action) => {
-      state.status = "fulfilled";
       state.userPosts = action.payload;
+      state.status = "fulfilled";
     },
     [getPostsByUsername.rejected]: (state, action) => {
       state.status = "rejected";

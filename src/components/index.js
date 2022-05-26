@@ -12,6 +12,7 @@ export { EmojiPicker } from "./emoji/EmojiPicker";
 export { PostCard } from "./cards/post-card/PostCard";
 export { FilterCard } from "./cards/filter-card/FilterCard";
 export { ProfileCard } from "./cards/profile-card/ProfileCard";
+export { CommonProfileCard } from "./cards/common-profile-card/CommonProfileCard";
 export { CommentCard } from "./cards/comment-card/CommentCard";
 export { Routing } from "./routes/Routing";
 export { RequireAuth } from "./require-auth/RequireAuth";

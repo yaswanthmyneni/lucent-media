@@ -1,11 +1,11 @@
 import { Avatar } from "components";
 import {
-  AiOutlineLike,
-  AiOutlineDislike,
+  BiUpvote,
+  BiDownvote,
   MdOutlineModeEdit,
   MdDeleteOutline,
-  AiTwotoneLike,
-  AiTwotoneDislike,
+  ImArrowUp,
+  ImArrowDown,
 } from "assets/icons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -57,33 +57,35 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
           <span className="text-gray-400">Replying to</span> @{post.username}
         </p>
         <p>{text}</p>
-        <div
-          className={`mt-4 flex flex-wrap ${
-            foundUser.username === username
-              ? "justify-between"
-              : "justify-end gap-12"
-          }  text-2xl`}
-        >
-          {upvotedBy?.find((user) => user._id === foundUser._id) ? (
-            <AiTwotoneLike />
-          ) : (
-            <AiOutlineLike
-              className="cursor-pointer"
-              onClick={() => {
-                dispatch(upVoteComment({ commentId: _id, postId: post._id }));
-              }}
-            />
-          )}
-          {downvotedBy?.find((user) => user._id === foundUser._id) ? (
-            <AiTwotoneDislike />
-          ) : (
-            <AiOutlineDislike
-              className="cursor-pointer"
-              onClick={() => {
-                dispatch(downVoteComment({ commentId: _id, postId: post._id }));
-              }}
-            />
-          )}
+        <div className={`mt-4 flex flex-wrap items-center gap-8  text-2xl`}>
+          <div className="flex items-center  gap-2 w-14">
+            {upvotedBy?.find((user) => user._id === foundUser._id) ? (
+              <ImArrowUp className='text-xl' />
+            ) : (
+              <BiUpvote
+                className="cursor-pointer"
+                onClick={() => {
+                  dispatch(upVoteComment({ commentId: _id, postId: post._id }));
+                }}
+              />
+            )}
+            <p className="text-xl">{upvotedBy.length}</p>
+          </div>
+          <div className="flex items-center gap-2 w-14">
+            {downvotedBy?.find((user) => user._id === foundUser._id) ? (
+              <ImArrowDown className='text-xl'/>
+            ) : (
+              <BiDownvote
+                className="cursor-pointer"
+                onClick={() => {
+                  dispatch(
+                    downVoteComment({ commentId: _id, postId: post._id })
+                  );
+                }}
+              />
+            )}
+            <p className="text-xl">{downvotedBy.length}</p>
+          </div>
           {foundUser.username === username && (
             <MdOutlineModeEdit
               className="cursor-pointer"

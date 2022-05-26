@@ -2,6 +2,7 @@ import { BiImageAdd, BsEmojiSunglasses, FaVideo } from "assets/icons/icons";
 import { Avatar, EmojiPicker } from "components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { createNewPost } from "redux-management";
 
 const NewPostCard = () => {
@@ -18,9 +19,10 @@ const NewPostCard = () => {
   const dispatch = useDispatch();
 
   const handlePost = (encodedToken, content, setData, img, video) => {
-    if (encodedToken && content.match(/^\s+$/) === null) {
+    if (encodedToken && content.match(/^\s*$/) === null) {
       dispatch(createNewPost({ content, img, video }));
       setData((prev) => ({ ...prev, content: "", img: null, video: null }));
+      toast.success('added new post');
     }
   };
 
@@ -81,16 +83,18 @@ const NewPostCard = () => {
             <label htmlFor="upload-image" className="cursor-pointer">
               <input
                 type="file"
+                accept="image/*"
                 id="upload-image"
                 className="hidden"
                 onChange={(e) => handleImageUpload(e, setData)}
               />
               <BiImageAdd className="text-3xl" />
             </label>
-            <label htmlFor="upload-video-at" className="cursor-pointer">
+            <label htmlFor="upload-video" className="cursor-pointer">
               <input
                 type="file"
-                id="upload-video-at"
+                accept="video/*"
+                id="upload-video"
                 className="hidden"
                 onChange={(e) => handleVideoUpload(e, setData)}
               />
@@ -111,7 +115,7 @@ const NewPostCard = () => {
             onClick={() =>
               handlePost(encodedToken, content, setData, img, video)
             }
-            disabled={!content}
+            // disabled={!content}
           >
             Post
           </button>

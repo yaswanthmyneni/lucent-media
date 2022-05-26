@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BsEmojiSunglasses } from "assets/icons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost, setIsEdit } from "redux-management";
+import { toast } from "react-toastify";
 
 const EditPostCard = () => {
   const [data, setData] = useState({
@@ -29,9 +30,8 @@ const EditPostCard = () => {
   }, [status]);
 
   const handleEditPost = (editedContent, img, video, editPost, dispatch) => {
-    if (editedContent === "") {
-      // TODO - will implement toast here
-      return console.log("please enter any input");
+    if (editedContent.match(/^\s*$/) !== null) {
+      return toast.warn("please enter any input");
     }
     dispatch(editPost({ editedContent, img, postId, video }));
   };
@@ -64,12 +64,13 @@ const EditPostCard = () => {
   return (
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-300"></div>
-      <div className="py-4 px-2 mb-4 w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-400">
+      <div className="py-4 px-2 mb-4 w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-300 border-2 border-slate-400">
         <Avatar className="w-16 h-16" image={image} />
         <div className="w-10/12">
           <textarea
             className="p-1 w-full bg-slate-100 focus:outline-none"
             rows="5"
+            required
             placeholder="what's in your mind?"
             value={data.content}
             onChange={(e) =>
@@ -81,6 +82,8 @@ const EditPostCard = () => {
           </label>
           <input
             id="upload-image"
+            accept="image/*"
+            required
             className="mb-4"
             type="file"
             onChange={(e) => handleImageUpload(e, setData)}
@@ -89,7 +92,9 @@ const EditPostCard = () => {
             Video:
           </label>
           <input
+            accept="video/*"
             id="upload-video"
+            required
             className="mb-4"
             type="file"
             onChange={(e) => handleVideoUpload(e, setData)}

@@ -1,5 +1,5 @@
 import { CgProfile } from "assets/icons/icons";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFoundUser } from "redux-management";
@@ -9,16 +9,33 @@ const Header = () => {
 
   const encodedToken = localStorage.getItem("token");
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  const {
-    foundUser: { _id },
-  } = useSelector((state) => state.auth);
+  const { foundUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const { _id } = foundUser;
 
   const handleLogout = () => {
     setIsShowUserOptions(!isShowUserOptions);
     localStorage.clear();
     dispatch(setFoundUser({}));
+  };
+
+  const handleNavigateToProfile = (
+    encodedToken,
+    setIsShowUserOptions,
+    isShowUserOptions,
+    navigate
+  ) => {
+    if (!encodedToken) {
+      setIsShowUserOptions(!isShowUserOptions);
+      return navigate("/signin", {
+        state: { from: { pathname: "/profile" } },
+      });
+    }
+    navigate("/profile", { state: { userId: _id } });
+    setIsShowUserOptions(!isShowUserOptions);
   };
 
   return (
@@ -36,14 +53,19 @@ const Header = () => {
         )}
       {isShowUserOptions && (
         <div className="text-black text-lg cursor-pointer bg-slate-100 absolute top-11 right-8 border-2 border-gray-400 ">
-          <NavLink
-            to="/profile"
-            state={{ userId: _id }}
+          <div
             className="py-1 px-10 hover:bg-lime-400 block border-b-2 border-gray-400 text-center"
-            onClick={() => setIsShowUserOptions(!isShowUserOptions)}
+            onClick={() => {
+              handleNavigateToProfile(
+                encodedToken,
+                setIsShowUserOptions,
+                isShowUserOptions,
+                navigate
+              );
+            }}
           >
             Profile
-          </NavLink>
+          </div>
           {encodedToken ? (
             <NavLink
               to="/logout"

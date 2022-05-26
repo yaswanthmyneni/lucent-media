@@ -9,7 +9,9 @@ const SignInPage = () => {
     username: "",
     password: "",
   });
-  const { status } = useSelector((state) => state.auth);
+  const { status, foundUser } = useSelector((state) => state.auth);
+
+  const encodedToken = localStorage.getItem("token");
 
   // from react-router-dom
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
-    if (status === "fulfilled") {
+    if (status === "fulfilled" && encodedToken) {
       const {
         state: { from },
       } = location;
@@ -40,14 +42,14 @@ const SignInPage = () => {
         });
       } else if (from?.pathname === "/profile") {
         navigate(from?.pathname, {
-          state: { userId: location?.state?.userId },
+          state: { userId: location?.state?.userId ?? foundUser._id },
           replace: true,
         });
       } else {
         navigate(from?.pathname, { replace: true });
       }
     }
-  }, [status, location, navigate]);
+  }, [status, location, navigate, foundUser._id, encodedToken]);
 
   return (
     <main className="pt-16">

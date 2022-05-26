@@ -43,4 +43,4 @@ export {
   getAllUsers,
   getUserDetails,
 } from "./slices/userSlice/userServices/userServices";
-export {setAllUsers} from "./slices/userSlice/userSlice";
+export {setAllUsers, setSearchValue} from "./slices/userSlice/userSlice";

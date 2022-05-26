@@ -21,6 +21,7 @@ export const authSlice = createSlice({
     [logInUser.fulfilled]: (state, { payload: { foundUser, token } }) => {
       state.status = 'fulfilled';
       localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
       state.foundUser = foundUser;
     },
     [logInUser.rejected]: (state, action) => {
