@@ -31,7 +31,7 @@ const SignUpPage = () => {
   const handleSignUp = (e, userDetails, setAllUsers, location) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      dispatch(signUpUser({userDetails, setAllUsers}));
+      dispatch(signUpUser({ userDetails, setAllUsers }));
       setUserDetails({ username: "", password: "" });
       navigate(location?.state?.from?.pathname, { replace: true });
     } else {
@@ -40,8 +40,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <main className="pt-8 pb-40">
-      <div className="w-96 py-4 px-8 m-auto border-2 rounded border-green-300">
+    <main className="pt-8 lg:pb-40">
+      <div className="w-96 md:w-3/5 lg:w-2/5 py-4 px-8 m-auto border-2 rounded border-green-300">
         <h2 className="text-3xl font-medium text-center">SignUp</h2>
         <form className="mt-4 flex flex-col">
           {inputFields.map((field, index) => (
@@ -69,7 +69,7 @@ const SignUpPage = () => {
           <p className="text-red-600">{error}</p>
           <button
             className="px-12 py-1 mt-4 bg-green-600 hover:bg-green-800 text-gray-50"
-            onClick={(e) => handleSignUp(e, userDetails,setAllUsers, location)}
+            onClick={(e) => handleSignUp(e, userDetails, setAllUsers, location)}
           >
             SignUp
           </button>

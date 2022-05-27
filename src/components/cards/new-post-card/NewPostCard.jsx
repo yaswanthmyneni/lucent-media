@@ -24,6 +24,12 @@ const NewPostCard = () => {
       setData((prev) => ({ ...prev, content: "", img: null, video: null }));
       toast.success('added new post');
     }
+    if(encodedToken && content.match(/^\s*$/) !== null){
+      toast.warn('Enter valid input');
+    }
+    if(!encodedToken){
+      toast.error('login to post!');
+    }
   };
 
   const handleImageUpload = (e, setData) => {
@@ -47,7 +53,7 @@ const NewPostCard = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400">
+    <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400 ">
       <Avatar className="w-16 h-16" image={foundUser.image} />
       <div className="w-10/12">
         <textarea
@@ -115,7 +121,6 @@ const NewPostCard = () => {
             onClick={() =>
               handlePost(encodedToken, content, setData, img, video)
             }
-            // disabled={!content}
           >
             Post
           </button>

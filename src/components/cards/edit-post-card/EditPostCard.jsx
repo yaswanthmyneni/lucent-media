@@ -64,9 +64,9 @@ const EditPostCard = () => {
   return (
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-300"></div>
-      <div className="py-4 px-2 mb-4 w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-300 border-2 border-slate-400">
+      <div className="py-4 px-2 mb-4 w-11/12 md:w-8/12 max-h-96 overflow-scroll fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 flex flex-wrap justify-center gap-4 bg-slate-300 border-2 border-slate-400">
         <Avatar className="w-16 h-16" image={image} />
-        <div className="w-10/12">
+        <div className="w-8/12 sm:w-10/12">
           <textarea
             className="p-1 w-full bg-slate-100 focus:outline-none"
             rows="5"
@@ -100,7 +100,7 @@ const EditPostCard = () => {
             onChange={(e) => handleVideoUpload(e, setData)}
           />
           {isEmoji && <EmojiPicker setContent={setData} />}
-          <div className="flex gap-2 items-center mt-2">
+          <div className="flex flex-wrap gap-2 items-center mt-2">
             <BsEmojiSunglasses
               className="text-2xl cursor-pointer"
               onClick={() =>
@@ -111,7 +111,7 @@ const EditPostCard = () => {
               }
             />
             <button
-              className={`px-6 py-1 ml-auto text-lg rounded ${
+              className={`px-2 sm:px-6 py-1 ml-auto  text-lg rounded ${
                 data.content === "" ? "cursor-not-allowed" : ""
               } bg-green-600 hover:bg-green-700 text-slate-100`}
               onClick={() =>
@@ -121,7 +121,7 @@ const EditPostCard = () => {
               Edit post
             </button>
             <button
-              className={`px-6 py-1 text-lg rounded border-2 border-green-600 text-green-600 bg-slate-50`}
+              className={`px-2 sm:px-6 py-1 text-lg rounded border-2 border-green-600 text-green-600 bg-slate-50`}
               onClick={() => cancelEditPost(dispatch, setData, setIsEdit)}
             >
               cancel

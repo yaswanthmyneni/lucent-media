@@ -76,14 +76,14 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="grid grid-cols-8 mt-4 pb-36">
+    <div className="flex flex-col gap-2 items-center xl:w-full lg:items-start lg:gap-0 lg:grid  lg:grid-cols-8 mt-4 pb-36">
       <AsideBarLeft />
       {userStatus === "loading" ? (
         <p>Loading...</p>
       ) : userStatus === "rejected" ? (
         <p>Error Occurred!</p>
       ) : (
-        <main className="col-start-3 col-end-7">
+        <main className="px-3 w-full sm:pl-2 sm:w-5/6 lg:mx-auto lg:col-start-3 lg:col-end-9 xl:col-end-7">
           <div className="flex flex-col gap-2 items-center">
             <div className="w-full relative">
               <div className="w-full h-56">
@@ -96,7 +96,7 @@ const ProfilePage = () => {
                 />
               </div>
               <Avatar
-                className="w-36 h-36 rounded-full border-2 shadow-sm shadow-gray-700 border-white absolute -bottom-24 left-4"
+                className="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-2 shadow-sm shadow-gray-700 border-white absolute -bottom-14 left-0 sm:-bottom-24 sm:left-4"
                 image={`${userId === _id ? image : user.image}`}
               />
             </div>
@@ -229,7 +229,7 @@ const ProfilePage = () => {
           {isEditProfile && <EditProfile setIsEditProfile={setIsEditProfile} />}
         </main>
       )}
-      <AsideBarRight />
+      <AsideBarRight className="hidden xl:block" />
       {isEdit && <EditPostCard />}
       {isDelete && <DeleteModal />}
     </div>

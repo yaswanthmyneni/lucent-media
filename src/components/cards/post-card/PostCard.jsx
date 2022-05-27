@@ -45,19 +45,23 @@ const PostCard = (props) => {
   );
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center p-2 bg-slate-50 border-2 border-zinc-400 relative">
+    <div className="flex flex-wrap gap-4 p-2 bg-slate-50 border-2 border-zinc-400 relative">
       <Avatar
         className="w-16 h-16 cursor-pointer"
         image={`${
           foundUser.username === userDetails.username ? foundUser.image : image
         }`}
-        onClickHandle={() => navigate("/profile", { state: { userId: userDetails._id } })}
+        onClickHandle={() =>
+          navigate("/profile", { state: { userId: userDetails._id } })
+        }
       />
-      <div className="w-10/12">
+      <div className="w-9/12 sm:w-10/12">
         <div className="flex flex-wrap gap-2 items-center">
           <b
-          className='cursor-pointer'
-          onClick={() => navigate("/profile", { state: { userId: userDetails._id } })}
+            className="cursor-pointer"
+            onClick={() =>
+              navigate("/profile", { state: { userId: userDetails._id } })
+            }
           >{`${firstName} ${lastName}`}</b>
           <p className="text-sm text-slate-500">@{username}</p>
           {pathname !== "/bookmark" && foundUser?.username === username && (

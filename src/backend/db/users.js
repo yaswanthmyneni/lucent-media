@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
-import adarshbalika from "assets/images/balika.jpeg";
+import nandhini from "assets/images/balika.jpeg";
 import bgImage from "assets/images/bg.jpeg";
 import shubhamsoni from "assets/images/soni.jpg";
 import yaswanth from "assets/images/mock.jpg";
@@ -13,14 +13,14 @@ import yaswanth from "assets/images/mock.jpg";
 export const users = [
   {
     _id: uuid(),
-    firstName: "Adarsh",
-    lastName: "Balika",
-    username: "adarshbalika",
-    password: "adarshBalika123",
+    firstName: "Nandhini",
+    lastName: "Reddy",
+    username: "nandhini",
+    password: "nandhini123",
     bio: "about",
-    image: adarshbalika,
+    image: nandhini,
     backgroundImage: bgImage,
-    portfolioLink: "adarshbalika.com",
+    portfolioLink: "nandhinireddy.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

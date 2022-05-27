@@ -52,8 +52,8 @@ const SignInPage = () => {
   }, [status, location, navigate, foundUser._id, encodedToken]);
 
   return (
-    <main className="pt-16">
-      <div className="w-96 py-4 px-8 m-auto border-2 rounded border-green-300">
+    <main className="pt-16 lg:pb-40">
+      <div className="w-96 md:w-3/5 lg:w-2/5 py-4 px-8 m-auto border-2 rounded border-green-300">
         <h2 className="text-3xl font-medium text-center">SignIn</h2>
         <form className="mt-4 flex flex-col">
           {inputFields.map((field, index) => (
@@ -100,8 +100,8 @@ const SignInPage = () => {
               handleLogin(
                 e,
                 {
-                  username: "adarshbalika",
-                  password: "adarshBalika123",
+                  username: "nandhini",
+                  password: "nandhini123",
                 },
                 setSignInDetails
               )

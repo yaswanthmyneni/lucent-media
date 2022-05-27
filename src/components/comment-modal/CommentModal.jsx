@@ -42,14 +42,15 @@ const CommentModal = ({ setIsEditComment, postId }) => {
   return (
     <>
       <div className="fixed inset-0 opacity-75 bg-gray-200"></div>
-      <div className="px-8 py-4 mb-4 w-1/2 flex flex-col gap-4 fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 bg-zinc-300  border-2 border-slate-400">
+      <div className="px-2 lg:px-8 py-4 mb-4 w-3/4 lg:w-1/2 flex flex-col gap-4 fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 bg-zinc-300  border-2 border-slate-400">
         <p>Edit Comment:</p>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 w-full">
           <Avatar className="h-10 w-10" image={foundUser?.image} />
-          <input
-            className="outline-none px-1 py-2 w-11/12 bg-slate-100"
+          <textarea
+            className="outline-none px-1 py-2 w-9/12 md:w-10/12 bg-slate-100"
             type="text"
             placeholder="comment your reply"
+            rows='5'
             value={text}
             onChange={(e) => {
               setText(e.target.value);

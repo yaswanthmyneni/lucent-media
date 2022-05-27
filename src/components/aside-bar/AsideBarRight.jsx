@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, setSearchValue } from "redux-management";
 
-const AsideBarRight = () => {
+const AsideBarRight = ({ className }) => {
   const { foundUser } = useSelector((state) => state.auth);
   const { allUsers, searchValue } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -23,7 +23,9 @@ const AsideBarRight = () => {
   }
 
   return (
-    <aside className="w-11/12 p-2 mx-auto col-start-7 col-end-9">
+    <aside
+      className={`xl:w-11/12 ${className} p-2 md:border-2 md:border-slate-400 xl:border-0 xl:mx-auto md:col-start-5 md:col-end-9 xl:col-start-7 xl:col-end-9`}
+    >
       <label
         htmlFor="search"
         className="px-2 py-1 flex gap-2 items-center border border-solid border-slate-400"
@@ -43,7 +45,7 @@ const AsideBarRight = () => {
         <div className="flex flex-wrap justify-between items-center">
           <b>Whom to Follow?</b>
         </div>
-        <div className="mt-4 flex flex-col gap-4">
+        <div className="mt-4 max-h-32 overflow-scroll flex flex-col gap-4">
           {filteredUsers.map((user) => {
             if (
               searchValue.match(/^\s*$/) !== null &&

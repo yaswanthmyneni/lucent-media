@@ -24,9 +24,10 @@ const ExplorePage = () => {
   const reversePosts = [...allPosts]?.reverse();
 
   return (
-    <div className="grid grid-cols-8 mt-4 pb-36">
+    <div className="flex flex-col gap-2 items-center xl:w-full lg:items-start lg:gap-0 lg:grid  lg:grid-cols-8 mt-4 pb-36">
       <AsideBarLeft />
-      <main className="col-start-3 col-end-7">
+      <main className="p-2 sm:pl-2 md:w-2/3 lg:w-3/4 lg:mx-auto lg:col-start-3 lg:col-end-9 xl:col-end-7">
+        <AsideBarRight className="sm:block xl:hidden" />
         <h2 className="font-medium leading-tight text-2xl mt-2 mb-4">
           All Posts:
         </h2>
@@ -42,7 +43,7 @@ const ExplorePage = () => {
           </div>
         )}
       </main>
-      <AsideBarRight />
+      <AsideBarRight className="hidden xl:block" />
       {isEdit && <EditPostCard />}
       {isDelete && <DeleteModal />}
     </div>
