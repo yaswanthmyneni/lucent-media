@@ -19,10 +19,6 @@ export {
   AiFillHome,
   AiOutlineFileGif,
   AiOutlineHeart,
-  AiOutlineLike,
-  AiOutlineDislike,
-  AiTwotoneLike,
-  AiTwotoneDislike,
 } from "react-icons/ai";
 export {
   MdExplore,
