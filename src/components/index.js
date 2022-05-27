@@ -2,6 +2,7 @@ export { Header } from "./header/Header";
 export { Footer } from "./footer/Footer";
 export { AsideBarLeft } from "./aside-bar/AsideBarLeft";
 export { AsideBarRight } from "./aside-bar/AsideBarRight";
+export { AsideBarBottom } from "./aside-bar/AsideBarBottom";
 export { Avatar } from "./avatar/Avatar";
 export { CommentModal } from "./comment-modal/CommentModal";
 export { NewPostCard } from "./cards/new-post-card/NewPostCard";
