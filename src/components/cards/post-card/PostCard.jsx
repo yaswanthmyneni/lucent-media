@@ -22,6 +22,7 @@ import {
   setIsDelete,
 } from "redux-management";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PostCard = (props) => {
   const [isPostOptions, setIsPostOptions] = useState(false);
@@ -126,6 +127,9 @@ const PostCard = (props) => {
             <FiMessageSquare
               className="text-xl cursor-pointer w-12"
               onClick={() => {
+                if(pathname === '/comment'){
+                  return toast.warn('Already in comment page!');
+                }
                 navigate("/comment", {
                   state: { from: { pathname }, postId: _id },
                 });
