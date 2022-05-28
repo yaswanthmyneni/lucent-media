@@ -221,7 +221,7 @@ const ProfilePage = () => {
             <div className="flex flex-col gap-2">
               {userPosts[0]?.username === user?.username &&
                 reversedUserPosts?.map((post) => (
-                  <PostCard key={post._id} post={post} />
+                  <PostCard key={post._id} post={post} userId={userId}/>
                 ))}
             </div>
           )}

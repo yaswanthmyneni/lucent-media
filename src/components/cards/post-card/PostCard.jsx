@@ -37,6 +37,7 @@ const PostCard = (props) => {
 
   const {
     post: { _id, content, username, likes, img, video },
+    userId,
   } = props;
 
   const userDetails = allUsers.find((user) => user.username === username);
@@ -127,11 +128,11 @@ const PostCard = (props) => {
             <FiMessageSquare
               className="text-xl cursor-pointer w-12"
               onClick={() => {
-                if(pathname === '/comment'){
-                  return toast.warn('Already in comment page!');
+                if (pathname === "/comment") {
+                  return toast.warn("Already in comment page!");
                 }
                 navigate("/comment", {
-                  state: { from: { pathname }, postId: _id },
+                  state: { from: { pathname }, postId: _id, userId: userId },
                 });
               }}
             />

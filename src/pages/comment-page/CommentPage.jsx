@@ -28,6 +28,7 @@ const CommentPage = () => {
     state: {
       from: { pathname },
       postId,
+      userId,
     },
   } = useLocation();
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const CommentPage = () => {
           <div className="mb-1 flex gap-6 items-center">
             <FaArrowLeft
               className="text-xl cursor-pointer"
-              onClick={() => navigate(pathname)}
+              onClick={() => navigate(pathname, { state: { userId } })}
             />
             <h2 className="font-medium text-2xl">Post</h2>
           </div>
