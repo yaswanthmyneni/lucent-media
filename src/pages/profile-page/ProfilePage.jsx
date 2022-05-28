@@ -7,6 +7,7 @@ import {
   EditPostCard,
   DeleteModal,
   CommonProfileCard,
+  Loader,
 } from "components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,7 +80,7 @@ const ProfilePage = () => {
     <div className="flex flex-col gap-2 items-center xl:w-full lg:items-start lg:gap-0 lg:grid  lg:grid-cols-8 mt-4 pb-36">
       <AsideBarLeft />
       {userStatus === "loading" ? (
-        <p>Loading...</p>
+        <Loader />
       ) : userStatus === "rejected" ? (
         <p>Error Occurred!</p>
       ) : (
@@ -214,9 +215,7 @@ const ProfilePage = () => {
           <h4 className="font-medium leading-tight text-xl mt-4 mb-4">
             Your Posts
           </h4>
-          {status === "loading" ? (
-            <p>loading...</p>
-          ) : status === "rejected" ? (
+          {status === "rejected" ? (
             <p>{error}</p>
           ) : (
             <div className="flex flex-col gap-2">

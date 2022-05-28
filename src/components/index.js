@@ -4,6 +4,7 @@ export { AsideBarLeft } from "./aside-bar/AsideBarLeft";
 export { AsideBarRight } from "./aside-bar/AsideBarRight";
 export { AsideBarBottom } from "./aside-bar/AsideBarBottom";
 export { Avatar } from "./avatar/Avatar";
+export { Loader } from "./loader/Loader";
 export { CommentModal } from "./comment-modal/CommentModal";
 export { NewPostCard } from "./cards/new-post-card/NewPostCard";
 export { DeleteModal } from "./delete-modal/DeleteModal";

@@ -4,6 +4,7 @@ import {
   DeleteModal,
   EditPostCard,
   PostCard,
+  Loader,
 } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +33,7 @@ const ExplorePage = () => {
           All Posts:
         </h2>
         {status === "loading" ? (
-          <p>loading...</p>
+          <Loader />
         ) : status === "rejected" ? (
           <p>{error}</p>
         ) : (

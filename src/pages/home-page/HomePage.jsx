@@ -6,6 +6,7 @@ import {
   AsideBarRight,
   FilterCard,
   DeleteModal,
+  Loader,
 } from "components";
 import { useSelector } from "react-redux";
 
@@ -66,7 +67,7 @@ const HomePage = () => {
           Latest Posts
         </h3>
         {status === "loading" ? (
-          <p>loading...</p>
+          <Loader />
         ) : status === "rejected" ? (
           <p>{error}</p>
         ) : (

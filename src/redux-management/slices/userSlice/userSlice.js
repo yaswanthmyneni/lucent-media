@@ -15,7 +15,7 @@ const initialState = {
   userStatus: "idle",
   allUsers: [],
   user: {},
-  searchValue: '',
+  searchValue: "",
   bookmarkedPosts: [],
 };
 
@@ -53,9 +53,6 @@ export const userSlice = createSlice({
       state.userStatus = "rejected";
       console.error(action.payload);
     },
-    [followUser.pending]: (state) => {
-      state.userStatus = "loading";
-    },
     [followUser.fulfilled]: (state, action) => {
       state.userStatus = "fulfilled";
       state.user = action.payload;
@@ -63,9 +60,6 @@ export const userSlice = createSlice({
     [followUser.rejected]: (state, action) => {
       state.userStatus = "rejected";
       console.error(action.payload);
-    },
-    [unFollowUser.pending]: (state) => {
-      state.userStatus = "loading";
     },
     [unFollowUser.fulfilled]: (state, action) => {
       state.userStatus = "fulfilled";
@@ -104,9 +98,6 @@ export const userSlice = createSlice({
         "api call (getAllBookmarkedPosts) got rejected, check console";
       console.error(action.payload);
     },
-    [bookmarkPost.pending]: (state) => {
-      state.userStatus = "loading";
-    },
     [bookmarkPost.fulfilled]: (state, action) => {
       state.userStatus = "fulfilled";
       state.bookmarkedPosts = action.payload;
@@ -115,9 +106,6 @@ export const userSlice = createSlice({
       state.userStatus = "rejected";
       state.error = "api call (bookmarkPost) got rejected, check console";
       console.error(action.payload);
-    },
-    [removeBookmark.pending]: (state) => {
-      state.userStatus = "loading";
     },
     [removeBookmark.fulfilled]: (state, action) => {
       state.userStatus = "fulfilled";

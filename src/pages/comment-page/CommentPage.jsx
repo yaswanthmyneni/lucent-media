@@ -6,6 +6,7 @@ import {
   CommentModal,
   DeleteModal,
   EditPostCard,
+  Loader,
   PostCard,
 } from "components";
 import { FaArrowLeft } from "assets/icons/icons";
@@ -52,7 +53,7 @@ const CommentPage = () => {
       <AsideBarLeft />
       {status === "loading" ? (
         <main>
-          <p>Loading...</p>
+          <Loader />
         </main>
       ) : status === "rejected" ? (
         <main>
