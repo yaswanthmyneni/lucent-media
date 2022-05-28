@@ -15,6 +15,7 @@ import {
   setContent,
   upVoteComment,
 } from "redux-management";
+import { useNavigate } from "react-router-dom";
 
 const CommentCard = ({ comment, post, setIsEditComment }) => {
   const {
@@ -31,6 +32,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
   const { allUsers } = useSelector((state) => state.user);
   const { foundUser } = useSelector((state) => state.auth);
 
+  const navigate = useNavigate();
   const commentedUser = allUsers?.find((user) => user.username === username);
   const { firstName, lastName, image } = commentedUser;
 
@@ -47,10 +49,21 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
 
   return (
     <div className="flex flex-wrap gap-2 px-6 py-2 border border-zinc-400 bg-slate-50">
-      <Avatar className="w-10 h-10" image={image} />
+      <Avatar
+        className="w-10 h-10 cursor-pointer"
+        image={image}
+        onClickHandle={() =>
+          navigate("/profile", { state: { userId: commentedUser._id } })
+        }
+      />
       <div className="w-11/12">
         <div className="flex gap-2 items-center">
-          <b>{`${firstName} ${lastName}`}</b>
+          <b
+            className="cursor-pointer"
+            onClick={() =>
+              navigate("/profile", { state: { userId: commentedUser._id } })
+            }
+          >{`${firstName} ${lastName}`}</b>
           <p className="text-gray-400">@{username}</p>
         </div>
         <p>
@@ -60,7 +73,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
         <div className={`mt-4 flex flex-wrap items-center gap-8  text-2xl`}>
           <div className="flex items-center  gap-2 w-14">
             {upvotedBy?.find((user) => user._id === foundUser._id) ? (
-              <ImArrowUp className='text-xl' />
+              <ImArrowUp className="text-xl" />
             ) : (
               <BiUpvote
                 className="cursor-pointer"
@@ -73,7 +86,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
           </div>
           <div className="flex items-center gap-2 w-14">
             {downvotedBy?.find((user) => user._id === foundUser._id) ? (
-              <ImArrowDown className='text-xl'/>
+              <ImArrowDown className="text-xl" />
             ) : (
               <BiDownvote
                 className="cursor-pointer"
