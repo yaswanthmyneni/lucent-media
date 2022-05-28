@@ -11,10 +11,20 @@ function App() {
       <Header />
       <Routing />
       <Footer />
-      <ToastContainer />
-      {(pathname !== "/signin" &&
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {pathname !== "/signin" &&
         pathname !== "/signup" &&
-        pathname !== "/logout") && <AsideBarBottom />}
+        pathname !== "/logout" && <AsideBarBottom />}
     </>
   );
 }
