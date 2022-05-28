@@ -19,9 +19,14 @@ const AsideBarRight = ({ className }) => {
       user.username.toLowerCase().includes(searchValue.toLowerCase())
     );
   } else {
-    filteredUsers = allUsers;
+    filteredUsers = allUsers.filter(
+      (user) =>
+        !foundUser.following.find(
+          (followingUser) => followingUser.username === user.username
+        )
+    );
   }
-
+  console.log(filteredUsers);
   return (
     <aside
       className={`xl:w-11/12 ${className} p-2 md:border-2 md:border-slate-400 xl:border-0 xl:mx-auto md:col-start-5 md:col-end-9 xl:col-start-7 xl:col-end-9`}
@@ -46,7 +51,9 @@ const AsideBarRight = ({ className }) => {
           <b>Whom to Follow?</b>
         </div>
         <div className="mt-4 max-h-32 overflow-scroll flex flex-col gap-4">
-          {filteredUsers?.length > 0 ? (
+          {filteredUsers?.length === 1 ? (
+            <p className="text-center">You have followed all users!</p>
+          ) : filteredUsers?.length > 0 ? (
             filteredUsers.map((user) => {
               if (user._id === foundUser?._id) {
                 return "";
