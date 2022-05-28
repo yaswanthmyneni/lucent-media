@@ -62,7 +62,6 @@ const CommentPage = () => {
         </main>
       ) : (
         <main className="flex flex-col gap-1 sm:bg-gray-200 sm:pl-2 mx-auto w-full sm:w-5/6 xl:w-full sm:p-4 lg:mx-auto lg:col-start-3 lg:col-end-9 xl:col-end-7">
-          <AsideBarRight className="block mb-4 bg-white xl:hidden" />
           <div className="mb-1 flex gap-6 items-center">
             <FaArrowLeft
               className="text-xl cursor-pointer"

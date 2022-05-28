@@ -48,7 +48,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 px-6 py-2 border border-zinc-400 bg-slate-50">
+    <div className="flex flex-wrap gap-2 px-2 sm:px-6 py-2 border border-zinc-400 bg-slate-50">
       <Avatar
         className="w-10 h-10 cursor-pointer"
         image={image}
@@ -56,7 +56,7 @@ const CommentCard = ({ comment, post, setIsEditComment }) => {
           navigate("/profile", { state: { userId: commentedUser._id } })
         }
       />
-      <div className="w-11/12">
+      <div className="w-10/12">
         <div className="flex gap-2 items-center">
           <b
             className="cursor-pointer"

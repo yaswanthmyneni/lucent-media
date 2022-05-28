@@ -29,7 +29,7 @@ const AsideBarRight = ({ className }) => {
  
   return (
     <aside
-      className={`xl:w-11/12 ${className} p-2 md:border-2 md:border-slate-400 xl:border-0 xl:mx-auto md:col-start-5 md:col-end-9 xl:col-start-7 xl:col-end-9`}
+      className={`xl:w-11/12 ${className} p-2 xl:mx-auto md:col-start-5 md:col-end-9 xl:col-start-7 xl:col-end-9`}
     >
       <label
         htmlFor="search"

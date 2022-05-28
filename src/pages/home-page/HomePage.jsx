@@ -59,9 +59,9 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-2 items-center xl:w-full lg:items-start lg:gap-0 lg:grid  lg:grid-cols-8 mt-4 pb-36">
       <AsideBarLeft />
-      <main className="px-3 w-full sm:pl-2 sm:w-2/3  lg:w-3/4 lg:mx-auto lg:col-start-3 lg:col-end-9 xl:col-end-7">
+      <main className="px-3 w-full sm:pl-2 sm:w-10/12  lg:w-3/4 lg:mx-auto lg:col-start-3 lg:col-end-9 xl:col-end-7">
         <NewPostCard />
-        <AsideBarRight className="block mb-4 xl:hidden" />
+        <AsideBarRight className="block mb-4 xl:hidden md:border-2 md:border-slate-400 xl:border-0" />
         <FilterCard />
         <h3 className="font-medium leading-tight text-2xl mt-1 mb-4">
           Latest Posts
