@@ -57,7 +57,7 @@ export const postSlice = createSlice({
     },
     setIsDelete: (state, action) => {
       state.isDelete = action.payload;
-    }
+    },
   },
   extraReducers: {
     [getAllPosts.pending]: (state) => {
@@ -98,10 +98,11 @@ export const postSlice = createSlice({
     },
     [editPost.fulfilled]: (state, action) => {
       state.status = "fulfilled";
-      state.allPosts = action.payload;
+      state.allPosts = action.payload.posts;
       state.postId = null;
       state.isEdit = false;
       state.content = "";
+      action.payload.toast.success("edited post successfully");
     },
     [editPost.rejected]: (state, action) => {
       state.status = "rejected";

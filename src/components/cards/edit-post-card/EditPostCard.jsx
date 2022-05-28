@@ -20,20 +20,26 @@ const EditPostCard = () => {
   const { image } = foundUser;
 
   useEffect(() => {
-    setData((prev) => ({ ...prev, editedContent: content }));
-  }, [content]);
-
-  useEffect(() => {
-    if (status === "fulfilled") {
-      setData((prev) => ({ ...prev, content: "", img: null, video: null }));
-    }
-  }, [status]);
+    setData((prev) => ({ ...prev, content: content }));
+    return () => {
+      if (status === "fulfilled") {
+        setData((prev) => ({ ...prev, content: "", img: null, video: null }));
+      }
+    };
+  }, [content, status]);
 
   const handleEditPost = (editedContent, img, video, editPost, dispatch) => {
     if (editedContent.match(/^\s*$/) !== null) {
       return toast.warn("please enter any input");
     }
-    dispatch(editPost({ editedContent, img, postId, video }));
+    const editDetails = { editedContent, postId, toast };
+    if (img !== null) {
+      editDetails.img = img;
+    }
+    if (video !== null) {
+      editDetails.video = video;
+    }
+    dispatch(editPost(editDetails));
   };
 
   const cancelEditPost = (dispatch, setData, setIsEdit) => {
