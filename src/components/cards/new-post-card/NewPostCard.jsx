@@ -2,6 +2,7 @@ import { BiImageAdd, BsEmojiSunglasses, FaVideo } from "assets/icons/icons";
 import { Avatar, EmojiPicker } from "components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { createNewPost } from "redux-management";
 
 const NewPostCard = () => {
@@ -18,9 +19,16 @@ const NewPostCard = () => {
   const dispatch = useDispatch();
 
   const handlePost = (encodedToken, content, setData, img, video) => {
-    if (encodedToken && content.match(/^\s+$/) === null) {
+    if (encodedToken && content.match(/^\s*$/) === null) {
       dispatch(createNewPost({ content, img, video }));
       setData((prev) => ({ ...prev, content: "", img: null, video: null }));
+      toast.success('added new post');
+    }
+    if(encodedToken && content.match(/^\s*$/) !== null){
+      toast.warn('Enter valid input');
+    }
+    if(!encodedToken){
+      toast.error('login to post!');
     }
   };
 
@@ -45,9 +53,9 @@ const NewPostCard = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400">
+    <div className="flex flex-wrap justify-center gap-4 py-4 px-2 mb-4 border-2 border-solid border-zinc-400 ">
       <Avatar className="w-16 h-16" image={foundUser.image} />
-      <div className="w-10/12">
+      <div className="w-9/12">
         <textarea
           className="p-1 w-full bg-slate-200 focus:outline-none"
           rows="5"
@@ -81,16 +89,18 @@ const NewPostCard = () => {
             <label htmlFor="upload-image" className="cursor-pointer">
               <input
                 type="file"
+                accept="image/*"
                 id="upload-image"
                 className="hidden"
                 onChange={(e) => handleImageUpload(e, setData)}
               />
               <BiImageAdd className="text-3xl" />
             </label>
-            <label htmlFor="upload-video-at" className="cursor-pointer">
+            <label htmlFor="upload-video" className="cursor-pointer">
               <input
                 type="file"
-                id="upload-video-at"
+                accept="video/*"
+                id="upload-video"
                 className="hidden"
                 onChange={(e) => handleVideoUpload(e, setData)}
               />
@@ -111,7 +121,6 @@ const NewPostCard = () => {
             onClick={() =>
               handlePost(encodedToken, content, setData, img, video)
             }
-            disabled={!content}
           >
             Post
           </button>

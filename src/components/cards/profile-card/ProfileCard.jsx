@@ -16,13 +16,22 @@ const ProfileCard = ({ user }) => {
 
   return (
     <div className="flex flex-wrap gap-4 items-center">
-      <Avatar className="w-9 h-9" image={image} />
+      <Avatar
+        className="w-9 h-9 cursor-pointer"
+        image={image}
+        onClickHandle={() => navigate("/profile", { state: { userId: _id } })}
+      />
       <div>
         <b
           className="cursor-pointer"
           onClick={() => navigate("/profile", { state: { userId: _id } })}
         >{`${firstName} ${lastName}`}</b>
-        <p className="text-xs text-slate-400">@{username}</p>
+        <p
+          className="text-xs cursor-pointer text-slate-400"
+          onClick={() => navigate("/profile", { state: { userId: _id } })}
+        >
+          @{username}
+        </p>
       </div>
       {following?.find((user) => user._id === _id) ? (
         <p className="ml-auto text-xs text-green-600">following</p>

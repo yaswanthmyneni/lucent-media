@@ -3,7 +3,6 @@ import {
   AiFillHeart,
   AiOutlineHeart,
   FiMessageSquare,
-  MdOutlineShare,
   BsBookmark,
   BiDotsHorizontalRounded,
   MdModeEdit,
@@ -23,6 +22,7 @@ import {
   setIsDelete,
 } from "redux-management";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PostCard = (props) => {
   const [isPostOptions, setIsPostOptions] = useState(false);
@@ -37,6 +37,7 @@ const PostCard = (props) => {
 
   const {
     post: { _id, content, username, likes, img, video },
+    userId,
   } = props;
 
   const userDetails = allUsers.find((user) => user.username === username);
@@ -46,16 +47,24 @@ const PostCard = (props) => {
   );
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center p-2 bg-slate-50 border-2 border-zinc-400 relative">
+    <div className="flex flex-wrap gap-4 p-2 bg-slate-50 border-2 border-zinc-400 relative">
       <Avatar
-        className="w-16 h-16"
+        className="w-16 h-16 cursor-pointer"
         image={`${
           foundUser.username === userDetails.username ? foundUser.image : image
         }`}
+        onClickHandle={() =>
+          navigate("/profile", { state: { userId: userDetails._id } })
+        }
       />
-      <div className="w-10/12">
+      <div className="w-9/12 sm:w-10/12">
         <div className="flex flex-wrap gap-2 items-center">
-          <b>{`${firstName} ${lastName}`}</b>
+          <b
+            className="cursor-pointer"
+            onClick={() =>
+              navigate("/profile", { state: { userId: userDetails._id } })
+            }
+          >{`${firstName} ${lastName}`}</b>
           <p className="text-sm text-slate-500">@{username}</p>
           {pathname !== "/bookmark" && foundUser?.username === username && (
             <BiDotsHorizontalRounded
@@ -88,11 +97,11 @@ const PostCard = (props) => {
         </div>
         <div
           className={`flex flex-wrap  ${
-            pathname === "/bookmark" ? "justify-end" : "justify-between"
+            pathname === "/bookmark" ? "justify-end" : "gap-10"
           } items-center mt-3 mb-1`}
         >
           {pathname !== "/bookmark" && (
-            <div className="flex gap-1 w-16">
+            <div className="flex gap-1 w-12">
               {foundUser?.username === isLiked?.username && foundUser?._id ? (
                 <AiFillHeart
                   className={`text-2xl text-red-700 cursor-pointer`}
@@ -117,16 +126,16 @@ const PostCard = (props) => {
           )}
           {pathname !== "/bookmark" && (
             <FiMessageSquare
-              className="text-xl cursor-pointer"
+              className="text-xl cursor-pointer w-12"
               onClick={() => {
+                if (pathname === "/comment") {
+                  return toast.warn("Already in comment page!");
+                }
                 navigate("/comment", {
-                  state: { from: { pathname }, postId: _id },
+                  state: { from: { pathname }, postId: _id, userId: userId },
                 });
               }}
             />
-          )}
-          {pathname !== "/bookmark" && (
-            <MdOutlineShare className="text-xl cursor-not-allowed" />
           )}
           {bookmarkedPosts?.find((post) => post._id === _id) ? (
             <BsFillBookmarkFill

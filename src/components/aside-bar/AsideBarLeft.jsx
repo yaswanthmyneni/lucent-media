@@ -4,13 +4,16 @@ import clsx from "clsx";
 
 const AsideBarLeft = () => {
   return (
-    <aside className="p-2 mx-auto w-2/3 text-lg col-start-1 col-end-3">
+    <aside className="p-2 mx-auto w-2/3 text-lg col-start-1 col-end-3 hidden lg:block">
       <NavLink
         to="/home"
         className={({ isActive }) =>
-          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
-            "bg-slate-400": isActive,
-          })
+          clsx(
+            "flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400",
+            {
+              "bg-slate-400": isActive,
+            }
+          )
         }
       >
         <AiFillHome />
@@ -19,9 +22,12 @@ const AsideBarLeft = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
-            "bg-slate-400": isActive,
-          })
+          clsx(
+            "flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400",
+            {
+              "bg-slate-400": isActive,
+            }
+          )
         }
       >
         <MdExplore />
@@ -30,9 +36,12 @@ const AsideBarLeft = () => {
       <NavLink
         to="/bookmark"
         className={({ isActive }) =>
-          clsx("flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400", {
-            "bg-slate-400": isActive,
-          })
+          clsx(
+            "flex flex-wrap items-center gap-3 py-2 pl-10 my-2 hover:bg-slate-400",
+            {
+              "bg-slate-400": isActive,
+            }
+          )
         }
       >
         <FaBookmark />

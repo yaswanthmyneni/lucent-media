@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin, FaTwitter, AiFillHeart } from "assets/icons/icons
 
 const Footer = () => {
   return (
-    <footer className="p-6 flex flex-col items-center text-2xl w-full bg-green-300 absolute bottom-0">
+    <footer className="py-4 hidden lg:flex flex-col items-center text-lg w-full bg-green-300 absolute lg:bottom-0">
       <p>Made with <AiFillHeart className='inline-block text-red-600'/> by Yaswanth Myneni</p>
       <div className="flex gap-4 mt-4">
         <a

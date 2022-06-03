@@ -79,7 +79,7 @@ export const editPost = createAsyncThunk(
           },
         },
       });
-      return response.data.posts;
+      return {posts: response.data.posts, toast: data.toast};
     } catch (error) {
       return rejectWithValue(`Error from editPost: ${error.message}`);
     }

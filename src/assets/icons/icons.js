@@ -3,8 +3,11 @@ export {
   BiImageAdd,
   BiDotsHorizontalRounded,
   BiLogInCircle,
+  BiDownvote,
+  BiUpvote,
 } from "react-icons/bi";
 export { FiMessageSquare } from "react-icons/fi";
+export { ImArrowUp, ImArrowDown } from "react-icons/im";
 export { IoCloseSharp } from "react-icons/io5";
 export {
   BsEmojiSunglasses,
@@ -16,10 +19,6 @@ export {
   AiFillHome,
   AiOutlineFileGif,
   AiOutlineHeart,
-  AiOutlineLike,
-  AiOutlineDislike,
-  AiTwotoneLike,
-  AiTwotoneDislike,
 } from "react-icons/ai";
 export {
   MdExplore,

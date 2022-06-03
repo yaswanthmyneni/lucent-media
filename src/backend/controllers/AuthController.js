@@ -1,6 +1,8 @@
 import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
+import dp from "assets/images/dp.jpeg";
+import bg from "assets/images/bg.jpeg";
 const sign = require("jwt-encode");
 
 /**
@@ -36,6 +38,10 @@ export const signupHandler = function (schema, request) {
       updatedAt: formatDate(),
       username,
       password,
+      image: dp,
+      backgroundImage: bg,
+      bio: "this is bio",
+      portfolioLink: `${username}.com`,
       ...rest,
       followers: [],
       following: [],
