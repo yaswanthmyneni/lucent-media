@@ -1,0 +1,16 @@
+- Added toast.
+- Search feature.
+- Added default background image in profile page.
+- Up-vote and down-vote icon change.
+- Add CommonProfileCard.
+- Clicking on name or avatar will navigate to profile page in post, comment and profile cards.
+- All fields are required when we edit a profile.
+- Add AsideBarBottom.
+- Responsiveness
+- Fix: displaying loggedIn user in user search and add fallback of no users found.
+- Fix: disabling the comment icon onClick if user is in the comment page.
+- Add loading animation.
+- Remove the users in AsideBarRight once the user followed.
+- Add dummy profile edit option.
+- Fix: image and video will not change if it is not optioned in edit post.
+- Fix: coming back from comment page to profile page.
